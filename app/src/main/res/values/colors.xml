@@ -5,6 +5,14 @@
     <color name="purple_700">#FF3700B3</color>
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
+
+    <!-- List Color Sesuai Pallete-->
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="dark_brown">#5D4037</color>
+    <color name="brown">#795548</color>
+    <color name="cream">#D7CCC8</color>
+    <color name="yellow">#FFEB3B</color>
+    <color name="dark_gray">#757575</color>
+    <color name="light_gray">#BDBDBD</color>
 </resources>
