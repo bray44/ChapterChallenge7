@@ -4,24 +4,42 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
+import androidx.room.Room
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class GameHistoryModelView(application: Application): AndroidViewModel(application) {
+class GameHistoryModelView(application: Application) : AndroidViewModel(application) {
 
-    private val readAllGameHistory: LiveData<List<GameHistory>>
-    private val repository: GameHistoryRepository
-
-    init {
-        val gameHistoryDataDAO = GameHistoryDatabase.getDatabase(application).gameHistoryDataDAO()
-        repository = GameHistoryRepository(gameHistoryDataDAO)
-        readAllGameHistory = repository.readAllGameHistory
+    private val gameHistoryDataDAO: GameHistoryDataDAO by lazy {
+        Room.databaseBuilder(
+            application,
+            GameHistoryDatabase::class.java,
+            "game_history"
+        ).build().gameHistoryDataDAO()
     }
 
-    fun addGameHistory(gameHistory: GameHistory) {
+    fun addGameHistory(
+        playerOneName: String,
+        playerOneItem: Int,
+        playerTwoName: String,
+        playerTwoItem: Int,
+        gameResult: String
+    ) {
         viewModelScope.launch(Dispatchers.IO) {
-            repository.addGameHistory(gameHistory)
+            gameHistoryDataDAO.addGameHistory(
+                GameHistory(
+                    playerOneName = playerOneName,
+                    playerOneItem = playerOneItem,
+                    playerTwoName = playerTwoName,
+                    playerTwoItem = playerTwoItem,
+                    gameResult = gameResult
+                )
+            )
         }
+    }
+
+    fun readAllGameHistoryData(): LiveData<List<GameHistory>> {
+        return gameHistoryDataDAO.readAllGameHistoryData()
     }
 
 }
