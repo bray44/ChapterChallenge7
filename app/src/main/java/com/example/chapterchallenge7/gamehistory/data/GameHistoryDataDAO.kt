@@ -12,13 +12,12 @@ interface GameHistoryDataDAO {
 
     // Method utk menambah data ke tabel. On Conflict IGNORE yaitu apabila ada data sama diabaikan
     // dan tetap ditambahkan.
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    @Insert(onConflict = OnConflictStrategy.NONE)
     suspend fun addGameHistory(gameHistory: GameHistory) //fungsi dilakukan pada thread lain (coroutine)
 
     // Method untuk membaca list history player
     @Query("SELECT * FROM game_history_table")
     fun readAllGameHistoryData(): LiveData<List<GameHistory>>
-
 
 
 }

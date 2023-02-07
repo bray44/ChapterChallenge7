@@ -25,10 +25,10 @@
             android:exported="false" />
         <activity
             android:name=".gamehistory.GameHistoryActivity"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".gameplay.GameplayVsComActivity"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".gameplay.GameplayVsPlayerActivity"
             android:exported="true" />

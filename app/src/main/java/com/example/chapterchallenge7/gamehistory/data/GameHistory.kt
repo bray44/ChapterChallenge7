@@ -5,6 +5,8 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "game_history_table")
 data class GameHistory(
+    @PrimaryKey (autoGenerate = true)
+    val id: Int = 0,
     val playerOneName: String,
     val playerOneItem: Int,
     val playerTwoName: String,

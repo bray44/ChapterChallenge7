@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@color/brown"
+    android:minWidth="336dp"
+    android:minHeight="250dp"
+    android:padding="5dp"
+    tools:context=".gameplay.GameResultDialogFragment">
+
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_game_result_dialog_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/inika"
+        android:text="@string/hasil_permainan"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_game_result_winner_dialog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/inika"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/tv_game_result_dialog_title"
+        app:layout_constraintStart_toStartOf="@+id/tv_game_result_dialog_title"
+        app:layout_constraintTop_toBottomOf="@+id/tv_game_result_dialog_title"
+        tools:text="PEMAIN MENANG!" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_play_again_dialog"
+        android:layout_width="263dp"
+        android:layout_height="29dp"
+        android:layout_marginTop="76dp"
+        android:background="@drawable/btn_background2"
+        android:elevation="4dp"
+        android:fontFamily="@font/inika"
+        android:padding="0dp"
+        android:text="@string/main_lagi"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_game_result_winner_dialog" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_new_game_dialog"
+        android:layout_width="263dp"
+        android:layout_height="29dp"
+        android:layout_marginTop="9dp"
+        android:background="@drawable/btn_background2"
+        android:elevation="4dp"
+        android:fontFamily="@font/inika"
+        android:padding="0dp"
+        android:text="@string/game_baru"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/btn_play_again_dialog"
+        app:layout_constraintStart_toStartOf="@+id/btn_play_again_dialog"
+        app:layout_constraintTop_toBottomOf="@+id/btn_play_again_dialog" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_back_to_menu_dialog"
+        android:layout_width="263dp"
+        android:layout_height="29dp"
+        android:layout_marginTop="9dp"
+        android:background="@drawable/btn_background2"
+        android:elevation="4dp"
+        android:fontFamily="@font/inika"
+        android:padding="0dp"
+        android:text="@string/kembali_ke_menu"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/btn_new_game_dialog"
+        app:layout_constraintHorizontal_bias="0.49"
+        app:layout_constraintStart_toStartOf="@+id/btn_new_game_dialog"
+        app:layout_constraintTop_toBottomOf="@+id/btn_new_game_dialog" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/iv_close_dialog_button"
+        android:layout_width="22dp"
+        android:layout_height="24dp"
+        android:src="@android:drawable/btn_dialog"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_score_result"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="-32dp"
+        android:fontFamily="@font/inika"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="96sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/btn_play_again_dialog"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_game_result_winner_dialog"
+        app:layout_constraintVertical_bias="0.0"
+        tools:text="0:0" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_player_one_name_on_score"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="9dp"
+        android:fontFamily="@font/inika"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/btn_play_again_dialog"
+        app:layout_constraintEnd_toStartOf="@+id/tv_score_result"
+        app:layout_constraintTop_toBottomOf="@+id/tv_game_result_winner_dialog"
+        app:layout_constraintVertical_bias="0.534"
+        tools:text="Player 1" />
+
+    <TextView
+        android:id="@+id/tv_player_two_name_on_score"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="9dp"
+        android:fontFamily="@font/inika"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/btn_play_again_dialog"
+        app:layout_constraintStart_toEndOf="@+id/tv_score_result"
+        app:layout_constraintTop_toBottomOf="@+id/tv_game_result_winner_dialog"
+        tools:text="COM" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

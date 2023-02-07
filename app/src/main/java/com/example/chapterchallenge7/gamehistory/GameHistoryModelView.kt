@@ -1,10 +1,13 @@
-package com.example.chapterchallenge7.gamehistory.data
+package com.example.chapterchallenge7.gamehistory
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
 import androidx.room.Room
+import com.example.chapterchallenge7.gamehistory.data.GameHistory
+import com.example.chapterchallenge7.gamehistory.data.GameHistoryDataDAO
+import com.example.chapterchallenge7.gamehistory.data.GameHistoryDatabase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
