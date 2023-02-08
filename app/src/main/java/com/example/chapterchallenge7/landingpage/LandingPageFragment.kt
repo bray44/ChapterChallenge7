@@ -52,7 +52,7 @@ class LandingPageFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.btnNext.setOnClickListener{
-            val intent = Intent(activity,SignUpScreenActivity::class.java)
+            val intent = Intent(activity,LoginActivity::class.java)
             startActivity(intent)
         }
         binding.btnNext.visibility = buttonVisibility!!
@@ -62,10 +62,6 @@ class LandingPageFragment : Fragment() {
                 binding.ivLpImage.setImageResource(it)
             }
         }
-    }
-    fun visibility(){
-        val invisible = buttonVisibility
-        binding.btnNext
     }
 
 }
