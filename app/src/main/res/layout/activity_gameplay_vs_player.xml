@@ -179,14 +179,13 @@
         android:id="@+id/tv_player_two_message"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="92dp"
+        android:layout_marginBottom="96dp"
         android:fontFamily="@font/inika"
         android:textAlignment="center"
         android:textColor="@color/cream"
         android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         tools:text="Player 2 silahkan pilih itemmu" />
 
