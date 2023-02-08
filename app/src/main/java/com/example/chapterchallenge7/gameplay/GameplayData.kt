@@ -7,7 +7,7 @@ import android.content.Context
 class GameplayData(name: String, context: Context) {
 
     private val sharedPref = context.getSharedPreferences(name, Context.MODE_PRIVATE)
-    // Method untuk mengambil data nama player dan itemghdgdfgd
+    // Method untuk mengambil data nama player dan itemghdgdfgdssd
     fun getString(key: String, defaultValue: String): String? {
         return sharedPref.getString(key, defaultValue)
     }
