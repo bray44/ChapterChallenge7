@@ -104,5 +104,31 @@
         android:orientation="vertical"
         app:layout_constraintGuide_begin="263dp" />
 
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_player_one_score_game_history"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="1"
+        android:textSize="30sp"
+        android:fontFamily="@font/inika"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toTopOf="@+id/guideline4"
+        app:layout_constraintEnd_toStartOf="@+id/guideline7"
+        app:layout_constraintStart_toStartOf="@+id/guideline5"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_player_two_score_game_history"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="0"
+        android:textSize="30sp"
+        android:textColor="@color/white"
+        android:fontFamily="@font/inika"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline7"
+        app:layout_constraintStart_toStartOf="@+id/guideline5"
+        app:layout_constraintTop_toTopOf="@+id/guideline4" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

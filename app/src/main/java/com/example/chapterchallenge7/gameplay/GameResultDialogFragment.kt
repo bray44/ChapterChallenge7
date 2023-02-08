@@ -127,8 +127,10 @@ class GameResultDialogFragment : DialogFragment() {
         mGameHistoryViewModel.addGameHistory(
             playerOneName = mGameplayViewModel.getName(playerOne, "Player 1").toString(),
             playerOneItem = changeItemToImage(mGameplayViewModel.getItem(playerOne)),
+            playerOneScore = mGameplayViewModel.getScore(playerOne).toString(),
             playerTwoName = mGameplayViewModel.getName(playerTwo, "Player 2").toString(),
             playerTwoItem = changeItemToImage(mGameplayViewModel.getItem(playerTwo)),
+            playerTwoScore = mGameplayViewModel.getScore(playerTwo).toString(),
             gameResult = calculateResult()
 
         )

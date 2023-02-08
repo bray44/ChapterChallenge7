@@ -20,4 +20,6 @@ interface GameHistoryDataDAO {
     fun readAllGameHistoryData(): LiveData<List<GameHistory>>
 
 
+
+
 }
