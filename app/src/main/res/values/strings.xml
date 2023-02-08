@@ -5,6 +5,6 @@
     <string name="tv_player_two_name">COM</string>
     <string name="hasil_permainan">Hasil Permainan</string>
     <string name="main_lagi">Main Lagi</string>
-    <string name="game_baru">Game Baru</string>
+    <string name="ubah_mode_pemain">Ubah Mode Pemain</string>
     <string name="kembali_ke_menu">Kembali Ke Menu</string>
 </resources>

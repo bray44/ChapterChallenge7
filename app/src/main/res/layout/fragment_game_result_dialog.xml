@@ -2,9 +2,9 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:background="@color/brown"
+    android:layout_width="336dp"
+    android:layout_height="250dp"
+    android:background="@drawable/background_dialog_result"
     android:minWidth="336dp"
     android:minHeight="250dp"
     android:padding="5dp"
@@ -48,6 +48,7 @@
         android:fontFamily="@font/inika"
         android:padding="0dp"
         android:text="@string/main_lagi"
+        android:textAllCaps="false"
         android:textSize="14sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -63,7 +64,8 @@
         android:elevation="4dp"
         android:fontFamily="@font/inika"
         android:padding="0dp"
-        android:text="@string/game_baru"
+        android:text="@string/ubah_mode_pemain"
+        android:textAllCaps="false"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/btn_play_again_dialog"
         app:layout_constraintStart_toStartOf="@+id/btn_play_again_dialog"
@@ -79,6 +81,7 @@
         android:fontFamily="@font/inika"
         android:padding="0dp"
         android:text="@string/kembali_ke_menu"
+        android:textAllCaps="false"
         android:textSize="14sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/btn_new_game_dialog"
@@ -98,17 +101,17 @@
         android:id="@+id/tv_score_result"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="-32dp"
+        android:layout_marginTop="-30dp"
         android:fontFamily="@font/inika"
         android:textAlignment="center"
         android:textColor="@color/white"
-        android:textSize="96sp"
+        android:textSize="85sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/btn_play_again_dialog"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_game_result_winner_dialog"
-        app:layout_constraintVertical_bias="0.0"
+        app:layout_constraintVertical_bias="0.25"
         tools:text="0:0" />
 
     <androidx.appcompat.widget.AppCompatTextView
@@ -126,7 +129,7 @@
         app:layout_constraintVertical_bias="0.534"
         tools:text="Player 1" />
 
-    <TextView
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_player_two_name_on_score"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

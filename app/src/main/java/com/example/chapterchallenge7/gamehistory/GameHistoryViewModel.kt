@@ -11,7 +11,7 @@ import com.example.chapterchallenge7.gamehistory.data.GameHistoryDatabase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class GameHistoryModelView(application: Application) : AndroidViewModel(application) {
+class GameHistoryViewModel(application: Application) : AndroidViewModel(application) {
 
     private val gameHistoryDataDAO: GameHistoryDataDAO by lazy {
         Room.databaseBuilder(

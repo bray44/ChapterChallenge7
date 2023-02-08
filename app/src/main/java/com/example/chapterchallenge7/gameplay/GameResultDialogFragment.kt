@@ -9,17 +9,19 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
+import com.example.chapterchallenge7.R
 import com.example.chapterchallenge7.databinding.FragmentGameResultDialogBinding
+import com.example.chapterchallenge7.gamehistory.GameHistoryViewModel
 import com.example.chapterchallenge7.mainmenu.MainMenuActivity
 import com.example.chapterchallenge7.playermode.PlayerModeActivity
 
 class GameResultDialogFragment : DialogFragment() {
     private lateinit var binding: FragmentGameResultDialogBinding
     private lateinit var listener: ResultDialogListener
-    private lateinit var playerOne: SharedPreferences
-    private lateinit var playerTwo: SharedPreferences
-    private lateinit var mViewModel: ViewModel
-
+    private lateinit var playerOne: GameplayData
+    private lateinit var playerTwo: GameplayData
+    private lateinit var mGameplayViewModel: GameplayViewModel
+    private lateinit var mGameHistoryViewModel: GameHistoryViewModel
 
 
     interface ResultDialogListener {
@@ -45,22 +47,30 @@ class GameResultDialogFragment : DialogFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        mViewModel = ViewModelProvider(this)[ViewModel::class.java]
+        mGameplayViewModel = ViewModelProvider(this)[GameplayViewModel::class.java]
+        mGameHistoryViewModel = ViewModelProvider(this)[GameHistoryViewModel::class.java]
 
-        playerOne = mViewModel.createSharedPreferences("player_one")
-        playerTwo = mViewModel.createSharedPreferences("player_two")
-
+        playerOne = mGameplayViewModel.createGameplayData("player_one")
+        playerTwo = mGameplayViewModel.createGameplayData("player_two")
     }
 
     @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // Nama diberi toString agar tidak null
+        val playerOneName = mGameplayViewModel.getName(playerOne, "Player 1").toString()
+        val playerTwoName = mGameplayViewModel.getName(playerTwo, "Player 2").toString()
+
+
+        val playerOneScore = mGameplayViewModel.getScore(playerOne)
+        val playerTwoScore = mGameplayViewModel.getScore(playerTwo)
 
         binding.tvGameResultWinnerDialog.text = calculateResult()
-        binding.tvScoreResult.text = "${mViewModel.getScore(playerOne)}:${mViewModel.getScore(playerTwo)}"
-        binding.tvPlayerOneNameOnScore.text = mViewModel.getName(playerOne, "Player 1")
-        binding.tvPlayerTwoNameOnScore.text = mViewModel.getName(playerTwo, "Player 2")
+        binding.tvScoreResult.text = "$playerOneScore:$playerTwoScore"
+        binding.tvPlayerOneNameOnScore.text = playerOneName
+        binding.tvPlayerTwoNameOnScore.text = playerTwoName
+        saveGameDataToHistory()
 
 
 
@@ -75,8 +85,8 @@ class GameResultDialogFragment : DialogFragment() {
 
         binding.btnNewGameDialog.setOnClickListener {
             listener.resetAllTextAndItems()
-            mViewModel.resetScore(playerOne)
-            mViewModel.resetScore(playerTwo)
+            mGameplayViewModel.resetScore(playerOne)
+            mGameplayViewModel.resetScore(playerTwo)
             val intent = Intent(activity, PlayerModeActivity::class.java)
             startActivity(intent)
             dismiss()
@@ -89,22 +99,55 @@ class GameResultDialogFragment : DialogFragment() {
         }
     }
 
-    fun calculateResult(): String {
-        if (mViewModel.getItem(playerOne) == mViewModel.getItem(playerTwo)) {
-            return "DRAW!"
-        } else if (mViewModel.getItem(playerOne) == "KERTAS" && mViewModel.getItem(playerTwo) == "BATU") {
-            mViewModel.addScore(playerOne)
-            return "${mViewModel.getName(playerOne, "Player 1")}\n MENANG!"
-        } else if (mViewModel.getItem(playerOne) == "GUNTING" && mViewModel.getItem(playerTwo) == "KERTAS") {
-            mViewModel.addScore(playerOne)
-            return "${mViewModel.getName(playerOne, "Player 1")}\n MENANG!"
-        } else if (mViewModel.getItem(playerOne) == "BATU" && mViewModel.getItem(playerTwo) == "GUNTING") {
-            mViewModel.addScore(playerOne)
-            return "${mViewModel.getName(playerOne, "Player 1")}\n MENANG!"
+    private fun calculateResult(): String {
+
+        val playerOneItem = mGameplayViewModel.getItem(playerOne)
+        val playerTwoItem = mGameplayViewModel.getItem(playerTwo)
+        val playerOneWinText = "${mGameplayViewModel.getName(playerOne, "Player 1")}\n MENANG!"
+        val playerTwoWinText = "${mGameplayViewModel.getName(playerTwo, "Player 2")}\n MENANG!"
+
+        return if (playerOneItem == playerTwoItem) {
+            "DRAW!"
+        } else if (playerOneItem == "KERTAS" && playerTwoItem == "BATU") {
+            mGameplayViewModel.addScore(playerOne)
+            playerOneWinText
+        } else if (playerOneItem == "GUNTING" && playerTwoItem == "KERTAS") {
+            mGameplayViewModel.addScore(playerOne)
+            playerOneWinText
+        } else if (playerOneItem == "BATU" && playerTwoItem == "GUNTING") {
+            mGameplayViewModel.addScore(playerOne)
+            playerOneWinText
         } else {
-            mViewModel.addScore(playerTwo)
-            return "${mViewModel.getName(playerTwo, "Player 2")}\n MENANG!"
+            mGameplayViewModel.addScore(playerTwo)
+            playerTwoWinText
         }
     }
 
+    private fun saveGameDataToHistory() {
+        mGameHistoryViewModel.addGameHistory(
+            playerOneName = mGameplayViewModel.getName(playerOne, "Player 1").toString(),
+            playerOneItem = changeItemToImage(mGameplayViewModel.getItem(playerOne)),
+            playerTwoName = mGameplayViewModel.getName(playerTwo, "Player 2").toString(),
+            playerTwoItem = changeItemToImage(mGameplayViewModel.getItem(playerTwo)),
+            gameResult = calculateResult()
+
+        )
+    }
+
+    // Function untuk mengubah string menjadi Int supaya item pilihan player bisa disimpan dalam Room database
+    private fun changeItemToImage(item: String?): Int {
+        return when (item) {
+            "BATU" -> R.drawable.ic_batu
+            "KERTAS" -> R.drawable.ic_kertas
+            "GUNTING" -> R.drawable.ic_gunting
+            else -> {
+                0
+            }
+        }
+    }
 }
+
+
+
+
+

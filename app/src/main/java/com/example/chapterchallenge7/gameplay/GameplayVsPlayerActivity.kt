@@ -1,15 +1,12 @@
 package com.example.chapterchallenge7.gameplay
 
 import android.annotation.SuppressLint
-import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.core.view.forEach
 import androidx.lifecycle.ViewModelProvider
-import com.example.chapterchallenge7.R
 import com.example.chapterchallenge7.databinding.ActivityGameplayVsPlayerBinding
 import com.example.chapterchallenge7.mainmenu.MainMenuActivity
 import kotlin.random.Random
@@ -19,23 +16,23 @@ class GameplayVsPlayerActivity : AppCompatActivity(), GameResultDialogFragment.R
 
 
     private lateinit var binding: ActivityGameplayVsPlayerBinding
-    private lateinit var mViewModel: ViewModel
-    private lateinit var playerOne: SharedPreferences
-    private lateinit var playerTwo: SharedPreferences
+    private lateinit var mGameplayViewModel: GameplayViewModel
+    private lateinit var playerOne: GameplayData
+    private lateinit var playerTwo: GameplayData
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityGameplayVsPlayerBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        mViewModel = ViewModelProvider(this)[ViewModel::class.java]
+        mGameplayViewModel = ViewModelProvider(this)[GameplayViewModel::class.java]
 
-        playerOne = mViewModel.createSharedPreferences("player_one")
-        playerTwo = mViewModel.createSharedPreferences("player_two")
+        playerOne = mGameplayViewModel.createGameplayData("player_one")
+        playerTwo = mGameplayViewModel.createGameplayData("player_two")
 
-        mViewModel.getName(playerOne, "Player 1")
-        mViewModel.getName(playerTwo, "Player 2")
+        mGameplayViewModel.getName(playerOne, "Player 1")
+        mGameplayViewModel.getName(playerTwo, "Player 2")
 
-        binding.tvPlayerOneName.text = mViewModel.getName(playerOne, "Player 1")
+        binding.tvPlayerOneName.text = mGameplayViewModel.getName(playerOne, "Player 1")
         resetGameText()
 
         val listenerForPlayerOne = View.OnClickListener { view ->
@@ -82,7 +79,7 @@ class GameplayVsPlayerActivity : AppCompatActivity(), GameResultDialogFragment.R
     }
 
     private fun showTextInstructionOfPlayerTwo() {
-        binding.tvPlayerTwoMessage.text = "${mViewModel.getName(playerTwo, "Player 2")},\n silahkan pilih item mu"
+        binding.tvPlayerTwoMessage.text = "${mGameplayViewModel.getName(playerTwo, "Player 2")},\n silahkan pilih item mu"
         binding.tvPlayerOneMessage.text = ""
     }
 
@@ -98,18 +95,18 @@ class GameplayVsPlayerActivity : AppCompatActivity(), GameResultDialogFragment.R
         return listOfItems[index]
     }
 
-    private fun setChosenItemTo(player: SharedPreferences) {
+    private fun setChosenItemTo(player: GameplayData) {
         when (player) {
             playerOne -> when {
-                binding.ivPlayerOneGunting.isSelected -> mViewModel.setItem(playerOne, "GUNTING")
-                binding.ivPlayerOneBatu.isSelected -> mViewModel.setItem(playerOne, "BATU")
-                binding.ivPlayerOneKertas.isSelected -> mViewModel.setItem(playerOne, "KERTAS")
+                binding.ivPlayerOneGunting.isSelected -> mGameplayViewModel.setItem(playerOne, "GUNTING")
+                binding.ivPlayerOneBatu.isSelected -> mGameplayViewModel.setItem(playerOne, "BATU")
+                binding.ivPlayerOneKertas.isSelected -> mGameplayViewModel.setItem(playerOne, "KERTAS")
             }
 
             playerTwo -> when {
-                binding.ivPlayerTwoGunting.isSelected -> mViewModel.setItem(playerTwo, "GUNTING")
-                binding.ivPlayerTwoBatu.isSelected -> mViewModel.setItem(playerTwo, "BATU")
-                binding.ivPlayerTwoKertas.isSelected -> mViewModel.setItem(playerTwo, "KERTAS")
+                binding.ivPlayerTwoGunting.isSelected -> mGameplayViewModel.setItem(playerTwo, "GUNTING")
+                binding.ivPlayerTwoBatu.isSelected -> mGameplayViewModel.setItem(playerTwo, "BATU")
+                binding.ivPlayerTwoKertas.isSelected -> mGameplayViewModel.setItem(playerTwo, "KERTAS")
             }
         }
     }
@@ -117,9 +114,9 @@ class GameplayVsPlayerActivity : AppCompatActivity(), GameResultDialogFragment.R
     @SuppressLint("SetTextI18n")
     private fun showTextOfPlayerChosenItem() {
         binding.tvPlayerOneMessage.text =
-            "${mViewModel.getName(playerOne, "Player 1")}\n memilih ${mViewModel.getItem(playerOne)}."
+            "${mGameplayViewModel.getName(playerOne, "Player 1")}\n memilih ${mGameplayViewModel.getItem(playerOne)}."
         binding.tvPlayerTwoMessage.text =
-            "${mViewModel.getName(playerTwo, "Player 2")}\n memilih ${mViewModel.getItem(playerTwo)}."
+            "${mGameplayViewModel.getName(playerTwo, "Player 2")}\n memilih ${mGameplayViewModel.getItem(playerTwo)}."
     }
 
     private fun showGameResultDialog() {
@@ -141,7 +138,7 @@ class GameplayVsPlayerActivity : AppCompatActivity(), GameResultDialogFragment.R
     @SuppressLint("SetTextI18n")
     private fun resetGameText() {
         binding.tvPlayerOneMessage.text =
-            "${mViewModel.getName(playerOne, "Player 1")},\n silahkan pilih item mu"
+            "${mGameplayViewModel.getName(playerOne, "Player 1")},\n silahkan pilih item mu"
         binding.tvPlayerTwoMessage.text = ""
     }
 
