@@ -4,6 +4,200 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/brown"
+    android:padding="5dp"
     tools:context=".gameplay.GameplayVsPlayerActivity">
 
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/iv_home_button"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:background="@drawable/home_button_background"
+        android:scaleType="fitCenter"
+        android:tint="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_home"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_versus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/inika"
+        android:rotation="-31"
+        android:text="@string/tv_versus"
+        android:textColor="@color/teal_700"
+        android:textSize="60sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.5" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_player_one_message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="88dp"
+        android:fontFamily="@font/inika"
+        android:textAlignment="center"
+        android:textColor="@color/cream"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Player 1 silahkan pilih itemmu" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_player_one_item_list"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_player_one_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:fontFamily="@font/inika"
+            android:maxEms="5"
+            android:maxLines="1"
+            android:text="@string/tv_player_one_name"
+            android:textColor="@color/cream"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_player_one_batu"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginVertical="15dp"
+            android:layout_marginTop="68dp"
+            android:background="@drawable/items_background"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_batu"
+            app:layout_constraintEnd_toEndOf="@+id/tv_player_one_name"
+            app:layout_constraintStart_toStartOf="@+id/tv_player_one_name"
+            app:layout_constraintTop_toBottomOf="@+id/tv_player_one_name" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_player_one_kertas"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginVertical="15dp"
+            android:background="@drawable/items_background"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_kertas"
+            app:layout_constraintStart_toStartOf="@+id/iv_player_one_batu"
+            app:layout_constraintTop_toBottomOf="@+id/iv_player_one_batu" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_player_one_gunting"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginVertical="15dp"
+            android:background="@drawable/items_background"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_gunting"
+            app:layout_constraintStart_toStartOf="@+id/iv_player_one_kertas"
+            app:layout_constraintTop_toBottomOf="@+id/iv_player_one_kertas" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_player_two_item_list"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="12dp"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_player_two_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/inika"
+            android:text="@string/tv_player_two_name"
+            android:textColor="@color/cream"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_player_two_batu"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginVertical="15dp"
+            android:background="@drawable/items_background"
+            android:clickable="true"
+            android:focusable="true"
+            android:src="@drawable/ic_batu"
+            app:layout_constraintEnd_toEndOf="@+id/tv_player_two_name"
+            app:layout_constraintStart_toStartOf="@+id/tv_player_two_name"
+            app:layout_constraintTop_toBottomOf="@+id/tv_player_two_name"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_player_two_kertas"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginVertical="15dp"
+            android:background="@drawable/items_background"
+            android:clickable="true"
+            android:focusable="true"
+            android:src="@drawable/ic_kertas"
+            app:layout_constraintStart_toStartOf="@+id/iv_player_two_batu"
+            app:layout_constraintTop_toBottomOf="@+id/iv_player_two_batu"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_player_two_gunting"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginVertical="15dp"
+            android:background="@drawable/items_background"
+            android:clickable="true"
+            android:focusable="true"
+            android:src="@drawable/ic_gunting"
+            app:layout_constraintStart_toStartOf="@+id/iv_player_two_kertas"
+            app:layout_constraintTop_toBottomOf="@+id/iv_player_two_kertas"
+            tools:ignore="SpeakableTextPresentCheck" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_player_two_message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="92dp"
+        android:fontFamily="@font/inika"
+        android:textAlignment="center"
+        android:textColor="@color/cream"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:text="Player 2 silahkan pilih itemmu" />
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/iv_restart_game_button"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:adjustViewBounds="true"
+        android:scaleType="fitCenter"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/ic_refresh"
+        tools:ignore="SpeakableTextPresentCheck" />
 </androidx.constraintlayout.widget.ConstraintLayout>
