@@ -49,4 +49,10 @@ class GameHistoryViewModel(application: Application) : AndroidViewModel(applicat
         return gameHistoryDataDAO.readAllGameHistoryData()
     }
 
+    fun deleteAllGameHistoryData() {
+        viewModelScope.launch(Dispatchers.IO) {
+            gameHistoryDataDAO.deleteAllGameHistoryData()
+        }
+    }
+
 }

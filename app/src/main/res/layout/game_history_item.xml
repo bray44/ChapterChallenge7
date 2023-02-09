@@ -2,10 +2,11 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+    android:layout_width="390dp"
     android:layout_height="100dp"
     android:layout_margin="5dp"
-    android:background="@color/dark_brown"
+    android:background="@color/brown"
+    android:elevation="4dp"
     android:padding="5dp">
 
     <androidx.appcompat.widget.AppCompatTextView
@@ -117,7 +118,7 @@
         app:layout_constraintStart_toStartOf="@+id/guideline5"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_player_two_score_game_history"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

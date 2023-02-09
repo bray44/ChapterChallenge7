@@ -29,6 +29,7 @@ class GameplayViewModel(application: Application): AndroidViewModel(application)
         if (updatedScore != null) {
             player.saveInt("SCORE", updatedScore)
         }
+
     }
     fun resetScore(player: GameplayData) {
         player.saveInt("SCORE", 0)
