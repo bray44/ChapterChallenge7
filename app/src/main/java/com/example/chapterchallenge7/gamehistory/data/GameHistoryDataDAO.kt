@@ -16,7 +16,7 @@ interface GameHistoryDataDAO {
     suspend fun addGameHistory(gameHistory: GameHistory) //fungsi dilakukan pada thread lain (coroutine)
 
     // Method untuk membaca list history player
-    @Query("SELECT * FROM game_history_table")
+    @Query("SELECT * FROM game_history_table ORDER BY id DESC")
     fun readAllGameHistoryData(): LiveData<List<GameHistory>>
 
     @Query("DELETE FROM game_history_table")

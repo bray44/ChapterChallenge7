@@ -2,10 +2,10 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="390dp"
+    android:layout_width="match_parent"
     android:layout_height="100dp"
     android:layout_margin="5dp"
-    android:background="@color/brown"
+    android:background="@drawable/background_game_history_list_item"
     android:elevation="4dp"
     android:padding="5dp">
 
@@ -66,7 +66,7 @@
         android:fontFamily="@font/inika"
         android:textAlignment="center"
         android:textColor="@color/yellow"
-        android:textSize="25sp"
+        android:textSize="22sp"
         android:ellipsize="middle"
         android:maxEms="5"
         android:maxLines="2"
