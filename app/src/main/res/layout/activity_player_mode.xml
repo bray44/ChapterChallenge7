@@ -9,14 +9,14 @@
     tools:context=".mainmenu.MainMenuActivity">
 
 
-        <ImageView
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:src="@drawable/ic_close"
-            android:layout_gravity="end"
-            android:layout_marginRight="20dp"
-            android:layout_marginTop="10dp"
-            />
+    <ImageView
+        android:id="@+id/iv_close"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_gravity="end"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="20dp"
+        android:src="@android:drawable/btn_dialog" />
 
     <View
         android:layout_width="match_parent"
@@ -28,15 +28,14 @@
         android:text="Pilih Mode"
         android:textAlignment="center"
         android:textColor="@color/white"
-        android:textSize="25dp"
-        />
+        android:textSize="25dp" />
 
     <View
         android:layout_width="match_parent"
         android:layout_height="50dp" />
 
     <Button
-        android:id="@+id/play"
+        android:id="@+id/player"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="50dp"
@@ -46,7 +45,7 @@
         android:text="Pemain Vs Pemain" />
 
     <Button
-        android:id="@+id/history"
+        android:id="@+id/computer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="50dp"
