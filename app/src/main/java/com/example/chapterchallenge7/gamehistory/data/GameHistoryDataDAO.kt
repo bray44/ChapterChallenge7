@@ -19,6 +19,10 @@ interface GameHistoryDataDAO {
     @Query("SELECT * FROM game_history_table")
     fun readAllGameHistoryData(): LiveData<List<GameHistory>>
 
+    @Query("DELETE FROM game_history_table")
+    suspend fun deleteAllGameHistoryData()
+
+
 
 
 }
