@@ -24,8 +24,10 @@ class GameHistoryViewModel(application: Application) : AndroidViewModel(applicat
     fun addGameHistory(
         playerOneName: String,
         playerOneItem: Int,
+        playerOneScore: String,
         playerTwoName: String,
         playerTwoItem: Int,
+        playerTwoScore: String,
         gameResult: String
     ) {
         viewModelScope.launch(Dispatchers.IO) {
@@ -33,8 +35,10 @@ class GameHistoryViewModel(application: Application) : AndroidViewModel(applicat
                 GameHistory(
                     playerOneName = playerOneName,
                     playerOneItem = playerOneItem,
+                    playerOneScore = playerOneScore,
                     playerTwoName = playerTwoName,
                     playerTwoItem = playerTwoItem,
+                    playerTwoScore = playerTwoScore,
                     gameResult = gameResult
                 )
             )
@@ -43,6 +47,12 @@ class GameHistoryViewModel(application: Application) : AndroidViewModel(applicat
 
     fun readAllGameHistoryData(): LiveData<List<GameHistory>> {
         return gameHistoryDataDAO.readAllGameHistoryData()
+    }
+
+    fun deleteAllGameHistoryData() {
+        viewModelScope.launch(Dispatchers.IO) {
+            gameHistoryDataDAO.deleteAllGameHistoryData()
+        }
     }
 
 }

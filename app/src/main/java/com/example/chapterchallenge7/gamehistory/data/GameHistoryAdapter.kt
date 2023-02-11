@@ -28,8 +28,10 @@ class GameHistoryAdapter: RecyclerView.Adapter<GameHistoryAdapter.MyViewHolder>(
         holder.binding.apply {
             tvPlayerOneNameGameHistory.text = currentItem.playerOneName
             ivPlayerOneItemGameHistory.setImageResource(currentItem.playerOneItem)
+            tvPlayerOneScoreGameHistory.text = currentItem.playerOneScore
             tvPlayerTwoNameGameHistory.text = currentItem.playerTwoName
             ivPlayerTwoItemGameHistory.setImageResource(currentItem.playerTwoItem)
+            tvPlayerTwoScoreGameHistory.text = currentItem.playerTwoScore
             tvGameResultGameHistory.text = currentItem.gameResult
         }
     }

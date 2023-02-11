@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -58,21 +59,22 @@ class GameResultDialogFragment : DialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Nama diberi toString agar tidak null
-        val playerOneName = mGameplayViewModel.getName(playerOne, "Player 1").toString()
-        val playerTwoName = mGameplayViewModel.getName(playerTwo, "Player 2").toString()
+        //Show winner name to dialog
+        binding.tvGameResultWinnerDialog.text = calculateResult()
 
-
+        //Show player score to dialog
         val playerOneScore = mGameplayViewModel.getScore(playerOne)
         val playerTwoScore = mGameplayViewModel.getScore(playerTwo)
-
-        binding.tvGameResultWinnerDialog.text = calculateResult()
         binding.tvScoreResult.text = "$playerOneScore:$playerTwoScore"
+
+        //Show player name to dialog
+        val playerOneName = mGameplayViewModel.getName(playerOne, "Player 1").toString()
+        val playerTwoName = mGameplayViewModel.getName(playerTwo, "Player 2").toString()
         binding.tvPlayerOneNameOnScore.text = playerOneName
         binding.tvPlayerTwoNameOnScore.text = playerTwoName
+
+        //Save game data to Room
         saveGameDataToHistory()
-
-
 
         binding.ivCloseDialogButton.setOnClickListener {
             dismiss()
@@ -107,18 +109,23 @@ class GameResultDialogFragment : DialogFragment() {
         val playerTwoWinText = "${mGameplayViewModel.getName(playerTwo, "Player 2")}\n MENANG!"
 
         return if (playerOneItem == playerTwoItem) {
+            Log.d("TAG", "p1:${mGameplayViewModel.getScore(playerOne)} & p2:${mGameplayViewModel.getScore(playerTwo)}")
             "DRAW!"
         } else if (playerOneItem == "KERTAS" && playerTwoItem == "BATU") {
             mGameplayViewModel.addScore(playerOne)
+            Log.d("TAG", "p1:${mGameplayViewModel.getScore(playerOne)} & p2:${mGameplayViewModel.getScore(playerTwo)}")
             playerOneWinText
         } else if (playerOneItem == "GUNTING" && playerTwoItem == "KERTAS") {
             mGameplayViewModel.addScore(playerOne)
+            Log.d("TAG", "p1:${mGameplayViewModel.getScore(playerOne)} & p2:${mGameplayViewModel.getScore(playerOne)}")
             playerOneWinText
         } else if (playerOneItem == "BATU" && playerTwoItem == "GUNTING") {
             mGameplayViewModel.addScore(playerOne)
+            Log.d("TAG", "p1:${mGameplayViewModel.getScore(playerOne)} & p2:${mGameplayViewModel.getScore(playerTwo)}")
             playerOneWinText
         } else {
             mGameplayViewModel.addScore(playerTwo)
+            Log.d("TAG", "p1:${mGameplayViewModel.getScore(playerOne)} & p2:${mGameplayViewModel.getScore(playerTwo)}")
             playerTwoWinText
         }
     }
@@ -127,10 +134,11 @@ class GameResultDialogFragment : DialogFragment() {
         mGameHistoryViewModel.addGameHistory(
             playerOneName = mGameplayViewModel.getName(playerOne, "Player 1").toString(),
             playerOneItem = changeItemToImage(mGameplayViewModel.getItem(playerOne)),
+            playerOneScore = mGameplayViewModel.getScore(playerOne).toString(),
             playerTwoName = mGameplayViewModel.getName(playerTwo, "Player 2").toString(),
             playerTwoItem = changeItemToImage(mGameplayViewModel.getItem(playerTwo)),
-            gameResult = calculateResult()
-
+            playerTwoScore = mGameplayViewModel.getScore(playerTwo).toString(),
+            gameResult = binding.tvGameResultWinnerDialog.text.toString()
         )
     }
 

@@ -22,4 +22,7 @@
     <string name="main_lagi">Main Lagi</string>
     <string name="ubah_mode_pemain">Ubah Mode Pemain</string>
     <string name="kembali_ke_menu">Kembali Ke Menu</string>
+    <string name="game_history">Game History</string>
+    <string name="peringatan">PERINGATAN</string>
+    <string name="delete_data_warning_text">Apakah anda yakin ingin menghapus data? (Data yang terhapus tidak dapat dikembalikan)</string>
 </resources>

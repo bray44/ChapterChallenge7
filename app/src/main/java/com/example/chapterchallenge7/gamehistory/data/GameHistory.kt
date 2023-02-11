@@ -9,7 +9,9 @@ data class GameHistory(
     val id: Int = 0,
     val playerOneName: String,
     val playerOneItem: Int,
+    val playerOneScore: String,
     val playerTwoName: String,
     val playerTwoItem: Int,
+    val playerTwoScore: String,
     val gameResult: String
 )
