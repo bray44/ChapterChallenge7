@@ -9,6 +9,7 @@ import androidx.core.view.forEach
 import androidx.lifecycle.ViewModelProvider
 import com.example.chapterchallenge7.databinding.ActivityGameplayVsPlayerBinding
 import com.example.chapterchallenge7.mainmenu.MainMenuActivity
+import com.example.chapterchallenge7.playermode.PlayerModeActivity
 import kotlin.random.Random
 
 class GameplayVsPlayerActivity : AppCompatActivity(), GameResultDialogFragment.ResultDialogListener {
@@ -66,6 +67,11 @@ class GameplayVsPlayerActivity : AppCompatActivity(), GameResultDialogFragment.R
 
         binding.ivHomeButton.setOnClickListener {
             startActivity(Intent(this, MainMenuActivity::class.java))
+        }
+
+
+        binding.ivPlayerModeButton.setOnClickListener {
+            startActivity(Intent(this, PlayerModeActivity::class.java))
         }
 
         binding.ivRestartGameButton.setOnClickListener {
