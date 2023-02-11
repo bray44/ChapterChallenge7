@@ -65,10 +65,14 @@ class GameplayVsComActivity : AppCompatActivity(), GameResultDialogFragment.Resu
 
         binding.ivHomeButton.setOnClickListener {
             startActivity(Intent(this, MainMenuActivity::class.java))
+            mGameplayViewModel.resetScore(playerOne)
+            mGameplayViewModel.resetScore(playerTwo)
         }
 
         binding.ivPlayerModeButton.setOnClickListener {
             startActivity(Intent(this, PlayerModeActivity::class.java))
+            mGameplayViewModel.resetScore(playerOne)
+            mGameplayViewModel.resetScore(playerTwo)
         }
 
         binding.ivRestartGameButton.setOnClickListener {
@@ -77,9 +81,6 @@ class GameplayVsComActivity : AppCompatActivity(), GameResultDialogFragment.Resu
         }
     }
 
-    private fun playerOneItemsIsEnabled(boolean: Boolean) {
-        binding.clPlayerOneItemList.forEach { it.isEnabled = boolean }
-    }
 
     private fun chooseRandomItem(): View {
 
