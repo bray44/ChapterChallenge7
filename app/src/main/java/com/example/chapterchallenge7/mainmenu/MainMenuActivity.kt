@@ -10,7 +10,6 @@ import com.example.chapterchallenge7.gamehistory.GameHistoryActivity
 import com.example.chapterchallenge7.gameplay.GameplayViewModel
 import com.example.chapterchallenge7.login.LoginActivity
 import com.example.chapterchallenge7.playermode.PlayerModeActivity
-import com.google.android.gms.cast.framework.SessionManager
 import kotlin.system.exitProcess
 
 class MainMenuActivity : AppCompatActivity() {
