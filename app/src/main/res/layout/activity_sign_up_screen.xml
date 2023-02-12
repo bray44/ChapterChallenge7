@@ -6,6 +6,90 @@
     android:layout_height="match_parent"
     tools:context=".signup.SignUpScreenActivity">
 
+    <TextView
+        android:id="@+id/tv_signUp_title"
+        android:layout_width="106dp"
+        android:layout_height="21dp"
+        android:layout_marginTop="63dp"
+        android:text="@string/daftar_disini"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="60dp"
+        android:layout_marginEnd="271dp"
+        android:fontFamily="@font/inika"
+        android:padding="8dp"
+        android:text="@string/nama"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@id/tv_signUp_title"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/et_register_name"
+        android:layout_width="266dp"
+        android:layout_height="47dp"
+        android:layout_marginTop="156dp"
+        android:layout_marginBottom="150dp"
+        android:background="@drawable/btn_background2"
+        android:inputType="text"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="80dp"
+        android:layout_marginEnd="271dp"
+        android:fontFamily="@font/inika"
+        android:padding="8dp"
+        android:text="@string/kata_sandi"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@id/et_register_password"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/et_register_password"
+        android:layout_width="266dp"
+        android:layout_height="47dp"
+        android:layout_marginTop="240dp"
+        android:background="@drawable/btn_background2"
+        android:inputType="textPassword"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btn_login"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:background="@drawable/btn_background1"
+        android:fontFamily="@font/inika"
+        android:hint="@string/masuk"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/et_register_password" />
+
+    <ProgressBar
+        android:id="@+id/pb_loading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:visibility="gone"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/et_register_password" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

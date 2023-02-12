@@ -19,22 +19,23 @@ object RetrofitBuilder {
             .build()
     }
 
-    private fun okhttpClient(sharedPreferences: SharedPreferences): OkHttpClient{
+    private fun okhttpClient(sharedPreferences: SharedPreferences): OkHttpClient {
         return OkHttpClient.Builder()
-            .connectTimeout(6000,TimeUnit.MILLISECONDS)
+            .connectTimeout(6000, TimeUnit.MILLISECONDS)
             .addInterceptor(HeaderInterceptor(sharedPreferences))
             .addInterceptor(httpLogging)
             .build()
     }
-    private val httpLogging : HttpLoggingInterceptor
-    get() {
-        val logging = HttpLoggingInterceptor()
-        return logging.apply {
-            level = HttpLoggingInterceptor.Level.BODY
-        }
-    }
 
-    fun apiService(sharedPreferences: SharedPreferences): ApiService{
+    private val httpLogging: HttpLoggingInterceptor
+        get() {
+            val logging = HttpLoggingInterceptor()
+            return logging.apply {
+                level = HttpLoggingInterceptor.Level.BODY
+            }
+        }
+
+    fun apiService(sharedPreferences: SharedPreferences): ApiService {
         return getRetrofit(sharedPreferences).create(ApiService::class.java)
     }
 }
