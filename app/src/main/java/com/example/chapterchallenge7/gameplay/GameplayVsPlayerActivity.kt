@@ -5,6 +5,8 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.core.view.forEach
 import androidx.lifecycle.ViewModelProvider
 import com.example.chapterchallenge7.databinding.ActivityGameplayVsPlayerBinding
@@ -12,8 +14,8 @@ import com.example.chapterchallenge7.mainmenu.MainMenuActivity
 import com.example.chapterchallenge7.playermode.PlayerModeActivity
 import kotlin.random.Random
 
-class GameplayVsPlayerActivity : AppCompatActivity(), GameResultDialogFragment.ResultDialogListener {
-
+class GameplayVsPlayerActivity : AppCompatActivity(),
+    GameResultDialogFragment.ResultDialogListener {
 
 
     private lateinit var binding: ActivityGameplayVsPlayerBinding
@@ -38,40 +40,79 @@ class GameplayVsPlayerActivity : AppCompatActivity(), GameResultDialogFragment.R
 
         val listenerForPlayerOne = View.OnClickListener { view ->
 
-            view.isSelected = true
-            setChosenItemTo(playerOne)
-            playerOneItemsIsEnabled(false)
-            showTextInstructionOfPlayerTwo()
+            if (binding.tvPlayerOneMessage.text == "") {
+                val toast = Toast.makeText(this, "Klik item di bagian kanan", Toast.LENGTH_SHORT)
+                toast.show()
+            } else {
+                view.isSelected = true
+                setChosenItemTo(playerOne)
+                playerOneItemsIsEnabled(false)
+                showTextInstructionOfPlayerTwo()
+            }
         }
 
         val listenerForPlayerTwo = View.OnClickListener { view ->
-            view.isSelected = true
-            setChosenItemTo(playerTwo)
-            showGameResult()
-            allPlayersItemsIsEnabled(false)
+
+            if (binding.tvPlayerTwoMessage.text == "") {
+                val toast = Toast.makeText(this, "Klik item di bagian kiri", Toast.LENGTH_SHORT)
+                toast.show()
+            } else {
+                view.isSelected = true
+                setChosenItemTo(playerTwo)
+                showGameResult()
+                allPlayersItemsIsEnabled(false)
+            }
         }
-
-
-
 
         binding.ivPlayerOneBatu.setOnClickListener(listenerForPlayerOne)
         binding.ivPlayerOneKertas.setOnClickListener(listenerForPlayerOne)
         binding.ivPlayerOneGunting.setOnClickListener(listenerForPlayerOne)
 
-
-
-
         binding.ivPlayerTwoBatu.setOnClickListener(listenerForPlayerTwo)
         binding.ivPlayerTwoKertas.setOnClickListener(listenerForPlayerTwo)
         binding.ivPlayerTwoGunting.setOnClickListener(listenerForPlayerTwo)
 
+        val builderForHomeButton = AlertDialog.Builder(this)
+            .setTitle("PERINGATAN")
+            .setMessage("Apakah anda yakin ingin keluar? (Game masih berjalan)")
+            .setPositiveButton("Ya") { _, _ ->
+                startActivity(Intent(this, MainMenuActivity::class.java))
+                mGameplayViewModel.resetScore(playerOne)
+                mGameplayViewModel.resetScore(playerTwo)
+            }
+            .setNegativeButton("Tidak") { _, _ ->
+            }.create()
+
+        val builderForPlayerModeButton = AlertDialog.Builder(this)
+            .setTitle("PERINGATAN")
+            .setMessage("Apakah anda yakin ingin keluar? (Game masih berjalan)")
+            .setPositiveButton("Ya") { _, _ ->
+                startActivity(Intent(this, PlayerModeActivity::class.java))
+                mGameplayViewModel.resetScore(playerOne)
+                mGameplayViewModel.resetScore(playerTwo)
+            }
+            .setNegativeButton("Tidak") { _, _ ->
+            }.create()
+
         binding.ivHomeButton.setOnClickListener {
-            startActivity(Intent(this, MainMenuActivity::class.java))
+            if (binding.tvPlayerOneMessage.text == "") {
+                builderForHomeButton.show()
+            } else {
+                startActivity(Intent(this, MainMenuActivity::class.java))
+                mGameplayViewModel.resetScore(playerOne)
+                mGameplayViewModel.resetScore(playerTwo)
+            }
         }
 
-
         binding.ivPlayerModeButton.setOnClickListener {
-            startActivity(Intent(this, PlayerModeActivity::class.java))
+            builderForPlayerModeButton.show()
+            if (binding.tvPlayerOneMessage.text == "") {
+                builderForPlayerModeButton.show()
+            } else {
+                startActivity(Intent(this, PlayerModeActivity::class.java))
+                mGameplayViewModel.resetScore(playerOne)
+                mGameplayViewModel.resetScore(playerTwo)
+            }
         }
 
         binding.ivRestartGameButton.setOnClickListener {
@@ -85,34 +126,36 @@ class GameplayVsPlayerActivity : AppCompatActivity(), GameResultDialogFragment.R
     }
 
     private fun showTextInstructionOfPlayerTwo() {
-        binding.tvPlayerTwoMessage.text = "${mGameplayViewModel.getName(playerTwo, "Player 2")},\n silahkan pilih item mu"
+        binding.tvPlayerTwoMessage.text =
+            "${mGameplayViewModel.getName(playerTwo, "Player 2")},\n silahkan pilih item mu"
         binding.tvPlayerOneMessage.text = ""
     }
 
-    private fun chooseRandomItem(): View {
-
-        val listOfItems = listOf<View>(
-            binding.ivPlayerTwoGunting,
-            binding.ivPlayerTwoBatu,
-            binding.ivPlayerTwoKertas
-        )
-        val index = Random.nextInt(0, 3)
-
-        return listOfItems[index]
-    }
 
     private fun setChosenItemTo(player: GameplayData) {
         when (player) {
             playerOne -> when {
-                binding.ivPlayerOneGunting.isSelected -> mGameplayViewModel.setItem(playerOne, "GUNTING")
+                binding.ivPlayerOneGunting.isSelected -> mGameplayViewModel.setItem(
+                    playerOne,
+                    "GUNTING"
+                )
                 binding.ivPlayerOneBatu.isSelected -> mGameplayViewModel.setItem(playerOne, "BATU")
-                binding.ivPlayerOneKertas.isSelected -> mGameplayViewModel.setItem(playerOne, "KERTAS")
+                binding.ivPlayerOneKertas.isSelected -> mGameplayViewModel.setItem(
+                    playerOne,
+                    "KERTAS"
+                )
             }
 
             playerTwo -> when {
-                binding.ivPlayerTwoGunting.isSelected -> mGameplayViewModel.setItem(playerTwo, "GUNTING")
+                binding.ivPlayerTwoGunting.isSelected -> mGameplayViewModel.setItem(
+                    playerTwo,
+                    "GUNTING"
+                )
                 binding.ivPlayerTwoBatu.isSelected -> mGameplayViewModel.setItem(playerTwo, "BATU")
-                binding.ivPlayerTwoKertas.isSelected -> mGameplayViewModel.setItem(playerTwo, "KERTAS")
+                binding.ivPlayerTwoKertas.isSelected -> mGameplayViewModel.setItem(
+                    playerTwo,
+                    "KERTAS"
+                )
             }
         }
     }
@@ -120,9 +163,19 @@ class GameplayVsPlayerActivity : AppCompatActivity(), GameResultDialogFragment.R
     @SuppressLint("SetTextI18n")
     private fun showTextOfPlayerChosenItem() {
         binding.tvPlayerOneMessage.text =
-            "${mGameplayViewModel.getName(playerOne, "Player 1")}\n memilih ${mGameplayViewModel.getItem(playerOne)}."
+            "${
+                mGameplayViewModel.getName(
+                    playerOne,
+                    "Player 1"
+                )
+            }\n memilih ${mGameplayViewModel.getItem(playerOne)}."
         binding.tvPlayerTwoMessage.text =
-            "${mGameplayViewModel.getName(playerTwo, "Player 2")}\n memilih ${mGameplayViewModel.getItem(playerTwo)}."
+            "${
+                mGameplayViewModel.getName(
+                    playerTwo,
+                    "Player 2"
+                )
+            }\n memilih ${mGameplayViewModel.getItem(playerTwo)}."
     }
 
     private fun showGameResultDialog() {
