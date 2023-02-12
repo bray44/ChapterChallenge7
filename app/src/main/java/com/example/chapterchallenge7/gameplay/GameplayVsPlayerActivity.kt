@@ -2,6 +2,9 @@ package com.example.chapterchallenge7.gameplay
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.media.AudioAttributes
+import android.media.AudioManager
+import android.media.SoundPool
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -9,6 +12,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.view.forEach
 import androidx.lifecycle.ViewModelProvider
+import com.example.chapterchallenge7.R
 import com.example.chapterchallenge7.databinding.ActivityGameplayVsPlayerBinding
 import com.example.chapterchallenge7.mainmenu.MainMenuActivity
 import com.example.chapterchallenge7.playermode.PlayerModeActivity
@@ -17,6 +21,9 @@ import kotlin.random.Random
 class GameplayVsPlayerActivity : AppCompatActivity(),
     GameResultDialogFragment.ResultDialogListener {
 
+    private lateinit var soundPool: SoundPool
+    private val MAX_STREAM = 1
+    private var loaded = false
 
     private lateinit var binding: ActivityGameplayVsPlayerBinding
     private lateinit var mGameplayViewModel: GameplayViewModel
@@ -26,6 +33,31 @@ class GameplayVsPlayerActivity : AppCompatActivity(),
         super.onCreate(savedInstanceState)
         binding = ActivityGameplayVsPlayerBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        val audioManager = getSystemService(AUDIO_SERVICE) as AudioManager
+        val actualVolume = audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC).toFloat()
+        val maxVolume = audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC).toFloat()
+        val volume = actualVolume / maxVolume
+
+
+
+        val audioAttribute = AudioAttributes.Builder()
+            .setUsage(AudioAttributes.USAGE_GAME)
+            .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
+            .build()
+
+        val builder = SoundPool.Builder()
+        builder.setAudioAttributes(audioAttribute).setMaxStreams(MAX_STREAM)
+        soundPool = builder.build()
+
+
+
+        soundPool.setOnLoadCompleteListener { _, _, _ ->
+            loaded = true
+        }
+
+        val soundWin = soundPool.load(this, R.raw.Win, 1)
+        val soundLose = soundPool.load(this, R.raw.Lose, 1)
 
         mGameplayViewModel = ViewModelProvider(this)[GameplayViewModel::class.java]
 
