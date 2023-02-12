@@ -22,6 +22,7 @@ object RetrofitBuilder {
     private fun okhttpClient(sharedPreferences: SharedPreferences): OkHttpClient{
         return OkHttpClient.Builder()
             .connectTimeout(6000,TimeUnit.MILLISECONDS)
+            .addInterceptor(HeaderInterceptor(sharedPreferences))
             .addInterceptor(httpLogging)
             .build()
     }

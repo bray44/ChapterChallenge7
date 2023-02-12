@@ -7,6 +7,7 @@ import com.example.chapterchallenge7.mvvm.data.model.LoginRequest
 import com.example.chapterchallenge7.mvvm.data.model.LoginResponse
 import com.example.chapterchallenge7.mvvm.data.repository.Repository
 import com.example.chapterchallenge7.mvvm.utils.Resource
+import com.example.chapterchallenge7.mvvm.utils.errorResponse
 import kotlinx.coroutines.Dispatchers
 import okhttp3.Dispatcher
 
@@ -21,7 +22,7 @@ class LoginViewModel(private val repository: Repository):ViewModel() {
                 )
                 emit(Resource.succes(repository.login(body)))
             }catch (e : Exception){
-                emit(Resource.error(data = null, message = e.message ?: "Terjadi Kesalahan Login"))
+                emit(Resource.error(data = null, message = e.errorResponse()))
             }
         }
     }
