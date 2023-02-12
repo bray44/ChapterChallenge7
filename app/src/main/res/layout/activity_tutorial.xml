@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/dark_brown"
-    tools:context=".tutorial.Tutorial">
+    tools:context=".tutorial.TutorialActivity">
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/activity_tutorial_btn_exit"

@@ -78,6 +78,7 @@
         android:layout_marginTop="25dp"
         android:background="@drawable/btn_background1"
         android:text="Masuk"
+        android:textStyle="bold"
         android:textAllCaps="false"
         android:fontFamily="@font/inika"
         app:layout_constraintLeft_toLeftOf="parent"

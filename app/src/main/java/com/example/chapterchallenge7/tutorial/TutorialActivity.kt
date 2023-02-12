@@ -6,7 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.chapterchallenge7.databinding.ActivityTutorialBinding
 import com.example.chapterchallenge7.mainmenu.MainMenuActivity
 
-class Tutorial : AppCompatActivity() {
+class TutorialActivity : AppCompatActivity() {
     private lateinit var binding: ActivityTutorialBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {

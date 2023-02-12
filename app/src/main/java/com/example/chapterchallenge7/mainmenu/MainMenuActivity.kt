@@ -1,22 +1,17 @@
 package com.example.chapterchallenge7.mainmenu
 
 import android.content.Intent
-import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.example.chapterchallenge7.R
 import com.example.chapterchallenge7.databinding.ActivityMainMenuBinding
 import com.example.chapterchallenge7.gamehistory.GameHistoryActivity
-import com.example.chapterchallenge7.gameplay.GameplayViewModel
-import com.example.chapterchallenge7.login.LoginActivity
 import com.example.chapterchallenge7.playermode.PlayerModeActivity
-import com.example.chapterchallenge7.tutorial.Tutorial
-import com.google.android.gms.cast.framework.SessionManager
+import com.example.chapterchallenge7.tutorial.TutorialActivity
 import kotlin.system.exitProcess
 
 class MainMenuActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainMenuBinding
-    private lateinit var sessionManager: com.example.chapterchallenge7.mainmenu.SessionManager
+    private lateinit var sessionManager: SessionManager
     private lateinit var playerDetail: HashMap<String, String?>
     private lateinit var playerName: String
     private lateinit var playerID: String
@@ -28,11 +23,15 @@ class MainMenuActivity : AppCompatActivity() {
 
         supportActionBar?.hide()
 
-        playerDetail = sessionManager.getPlayerDetail()
-        playerName = playerDetail.get(sessionManager.NAME).toString()
-        playerID = playerDetail.get(sessionManager.ID).toString()
 
-        binding.tvPlayer.text = "Selamat Datang $playerName"
+
+
+
+        //playerDetail = sessionManager.getPlayerDetail()
+       // playerName = playerDetail.get(sessionManager.NAME).toString()
+        //playerID = playerDetail.get(sessionManager.ID).toString()
+
+        //binding.tvPlayer.text = "Selamat Datang $playerName"
 
         binding.play.setOnClickListener {
             startActivity(
@@ -48,7 +47,7 @@ class MainMenuActivity : AppCompatActivity() {
 
         binding.tutorial.setOnClickListener {
             startActivity(
-                Intent(this, Tutorial ::class.java)
+                Intent(this, TutorialActivity ::class.java)
             )
         }
 
