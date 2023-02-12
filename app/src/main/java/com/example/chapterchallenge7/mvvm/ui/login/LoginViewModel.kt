@@ -12,15 +12,15 @@ import kotlinx.coroutines.Dispatchers
 import okhttp3.Dispatcher
 
 class LoginViewModel(private val repository: Repository):ViewModel() {
-    fun login(email : String, password : String): LiveData<Resource<LoginResponse>>{
+    fun login(username : String, password : String): LiveData<Resource<LoginResponse>>{
         return liveData(Dispatchers.IO){
             emit(Resource.loading(data = null))
             try {
                 val body = LoginRequest(
-                    email = email,
+                    username = username,
                     password = password
                 )
-                emit(Resource.succes(repository.login(body)))
+                emit(Resource.success(repository.login(body)))
             }catch (e : Exception){
                 emit(Resource.error(data = null, message = e.errorResponse()))
             }
