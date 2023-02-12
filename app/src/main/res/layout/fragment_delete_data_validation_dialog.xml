@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@color/brown">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_warning_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/inika"
+        android:text="@string/peringatan"
+        android:textColor="@color/white"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_warning_delete_data_body"
+        android:layout_width="286dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/inika"
+        android:text="@string/delete_data_warning_text"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_warning_title" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_yes_delete_data"
+        android:layout_width="126dp"
+        android:layout_height="29dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="64dp"
+        android:layout_marginBottom="24dp"
+        android:background="@drawable/btn_background2"
+        android:elevation="4dp"
+        android:fontFamily="@font/inika"
+        android:text="Ya"
+        android:textAllCaps="false"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btn_no_delete_data"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_warning_delete_data_body" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_no_delete_data"
+        android:layout_width="126dp"
+        android:layout_height="29dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="32dp"
+        android:background="@drawable/btn_background2"
+        android:elevation="4dp"
+        android:fontFamily="@font/inika"
+        android:text="Tidak"
+        android:textAllCaps="false"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_warning_delete_data_body" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/iv_close_button"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/close_8" />
+</androidx.constraintlayout.widget.ConstraintLayout>

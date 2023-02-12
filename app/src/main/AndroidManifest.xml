@@ -19,16 +19,16 @@
             android:exported="false" />
         <activity
             android:name=".mainmenu.MainMenuActivity"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".landingpage.LandingPageActivity"
             android:exported="false" />
         <activity
             android:name=".gamehistory.GameHistoryActivity"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".gameplay.GameplayVsComActivity"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".gameplay.GameplayVsPlayerActivity"
             android:exported="true" />
@@ -39,10 +39,14 @@
             android:name=".splashscreen.SplashScreenActivity"
             android:exported="true">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".tutorial.TutorialActivity"
+            android:exported="true" />
 
         <meta-data
             android:name="preloaded_fonts"
