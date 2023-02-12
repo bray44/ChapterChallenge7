@@ -37,8 +37,6 @@ class GameplayVsComActivity : AppCompatActivity(), GameResultDialogFragment.Resu
         resetGameText()
 
         val listenerForPlayerOne = View.OnClickListener { view ->
-
-
             view.isSelected = true
             setChosenItemTo(playerOne)
             playerTwoChoosingItem()
