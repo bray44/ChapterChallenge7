@@ -35,7 +35,7 @@ class LoginActivity : AppCompatActivity() {
         setContentView(binding.root)
         enableButton()
 
-        binding.etLoginEmail.doAfterTextChanged {
+        binding.etUsername.doAfterTextChanged {
             enableButton()
         }
         binding.etLoginPassword.doAfterTextChanged {
@@ -43,7 +43,7 @@ class LoginActivity : AppCompatActivity() {
         }
         binding.btnLogin.setOnClickListener {
             viewModel.login(
-                email = binding.etLoginEmail.toString(),
+                username = binding.etUsername.toString(),
                 password = binding.etLoginPassword.toString(),
             ).observe(this){
                 when(it.status){
@@ -66,7 +66,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun enableButton() {
-        val email = binding.etLoginEmail.text.toString()
+        val email = binding.etUsername.text.toString()
         val password = binding.etLoginPassword.text.toString()
 
         binding.btnLogin.isEnabled = email.isNotEmpty() && password.isNotEmpty()
