@@ -40,28 +40,33 @@ class GameplayVsPlayerActivity : AppCompatActivity(),
 
         val listenerForPlayerOne = View.OnClickListener { view ->
 
-            view.isSelected = true
-            setChosenItemTo(playerOne)
-            playerOneItemsIsEnabled(false)
-            showTextInstructionOfPlayerTwo()
+            if (binding.tvPlayerOneMessage.text == "") {
+                val toast = Toast.makeText(this, "Klik item di bagian kanan", Toast.LENGTH_SHORT)
+                toast.show()
+            } else {
+                view.isSelected = true
+                setChosenItemTo(playerOne)
+                playerOneItemsIsEnabled(false)
+                showTextInstructionOfPlayerTwo()
+            }
         }
 
         val listenerForPlayerTwo = View.OnClickListener { view ->
-            view.isSelected = true
-            setChosenItemTo(playerTwo)
-            showGameResult()
-            allPlayersItemsIsEnabled(false)
+
+            if (binding.tvPlayerTwoMessage.text == "") {
+                val toast = Toast.makeText(this, "Klik item di bagian kiri", Toast.LENGTH_SHORT)
+                toast.show()
+            } else {
+                view.isSelected = true
+                setChosenItemTo(playerTwo)
+                showGameResult()
+                allPlayersItemsIsEnabled(false)
+            }
         }
-
-
-
 
         binding.ivPlayerOneBatu.setOnClickListener(listenerForPlayerOne)
         binding.ivPlayerOneKertas.setOnClickListener(listenerForPlayerOne)
         binding.ivPlayerOneGunting.setOnClickListener(listenerForPlayerOne)
-
-
-
 
         binding.ivPlayerTwoBatu.setOnClickListener(listenerForPlayerTwo)
         binding.ivPlayerTwoKertas.setOnClickListener(listenerForPlayerTwo)
@@ -90,11 +95,24 @@ class GameplayVsPlayerActivity : AppCompatActivity(),
             }.create()
 
         binding.ivHomeButton.setOnClickListener {
-            builderForHomeButton.show()
+            if (binding.tvPlayerOneMessage.text == "") {
+                builderForHomeButton.show()
+            } else {
+                startActivity(Intent(this, MainMenuActivity::class.java))
+                mGameplayViewModel.resetScore(playerOne)
+                mGameplayViewModel.resetScore(playerTwo)
+            }
         }
 
         binding.ivPlayerModeButton.setOnClickListener {
             builderForPlayerModeButton.show()
+            if (binding.tvPlayerOneMessage.text == "") {
+                builderForPlayerModeButton.show()
+            } else {
+                startActivity(Intent(this, PlayerModeActivity::class.java))
+                mGameplayViewModel.resetScore(playerOne)
+                mGameplayViewModel.resetScore(playerTwo)
+            }
         }
 
         binding.ivRestartGameButton.setOnClickListener {
