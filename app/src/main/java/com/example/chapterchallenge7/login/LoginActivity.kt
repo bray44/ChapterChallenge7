@@ -14,6 +14,7 @@ import com.example.chapterchallenge7.mvvm.data.api.RetrofitBuilder
 import com.example.chapterchallenge7.mvvm.data.repository.Repository
 import com.example.chapterchallenge7.mvvm.ui.login.LoginViewModel
 import com.example.chapterchallenge7.mvvm.utils.Status
+import com.example.chapterchallenge7.signup.SignUpScreenActivity
 import retrofit2.Retrofit
 
 class LoginActivity : AppCompatActivity() {
@@ -45,12 +46,12 @@ class LoginActivity : AppCompatActivity() {
             viewModel.login(
                 username = binding.etUsername.toString(),
                 password = binding.etLoginPassword.toString(),
-            ).observe(this){
-                when(it.status){
+            ).observe(this) {
+                when (it.status) {
                     Status.SUCCESS -> {
                         binding.btnLogin.visibility = View.VISIBLE
                         binding.pbLoading.visibility = View.GONE
-                        startActivity(Intent(this,MainMenuActivity::class.java))
+                        startActivity(Intent(this, MainMenuActivity::class.java))
                     }
                     Status.LOADING -> {
                         binding.btnLogin.visibility = View.GONE
@@ -63,12 +64,14 @@ class LoginActivity : AppCompatActivity() {
                 }
             }
         }
+        binding.tvDaftar.setOnClickListener {
+            startActivity(Intent(this, SignUpScreenActivity::class.java))
+        }
     }
 
     private fun enableButton() {
         val email = binding.etUsername.text.toString()
         val password = binding.etLoginPassword.text.toString()
-
         binding.btnLogin.isEnabled = email.isNotEmpty() && password.isNotEmpty()
     }
 }

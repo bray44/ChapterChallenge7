@@ -32,7 +32,14 @@ class SignUpScreenActivity : AppCompatActivity() {
             )
         )
         setContentView(binding.root)
+        enableButton()
 
+        binding.etSignupName.doAfterTextChanged {
+            enableButton()
+        }
+        binding.etSignupPassword.doAfterTextChanged {
+            enableButton()
+        }
         binding.btnSignup.setOnClickListener {
             viewModel.register(
                 password = binding.etSignupPassword.text.toString(),
@@ -64,4 +71,9 @@ class SignUpScreenActivity : AppCompatActivity() {
         }
     }
 
+    private fun enableButton() {
+        val username = binding.etSignupName.text.toString()
+        val password = binding.etSignupPassword.text.toString()
+        binding.btnSignup.isEnabled = username.isNotEmpty() && password.isNotEmpty()
+    }
 }
