@@ -27,6 +27,7 @@ class GameResultDialogFragment : DialogFragment() {
 
     interface ResultDialogListener {
         fun resetAllTextAndItems()
+
     }
 
     override fun onAttach(context: Context) {
@@ -102,32 +103,7 @@ class GameResultDialogFragment : DialogFragment() {
     }
 
     private fun calculateResult(): String {
-
-        val playerOneItem = mGameplayViewModel.getItem(playerOne)
-        val playerTwoItem = mGameplayViewModel.getItem(playerTwo)
-        val playerOneWinText = "${mGameplayViewModel.getName(playerOne, "Player 1")}\n MENANG!"
-        val playerTwoWinText = "${mGameplayViewModel.getName(playerTwo, "Player 2")}\n MENANG!"
-
-        return if (playerOneItem == playerTwoItem) {
-            Log.d("TAG", "p1:${mGameplayViewModel.getScore(playerOne)} & p2:${mGameplayViewModel.getScore(playerTwo)}")
-            "DRAW!"
-        } else if (playerOneItem == "KERTAS" && playerTwoItem == "BATU") {
-            mGameplayViewModel.addScore(playerOne)
-            Log.d("TAG", "p1:${mGameplayViewModel.getScore(playerOne)} & p2:${mGameplayViewModel.getScore(playerTwo)}")
-            playerOneWinText
-        } else if (playerOneItem == "GUNTING" && playerTwoItem == "KERTAS") {
-            mGameplayViewModel.addScore(playerOne)
-            Log.d("TAG", "p1:${mGameplayViewModel.getScore(playerOne)} & p2:${mGameplayViewModel.getScore(playerOne)}")
-            playerOneWinText
-        } else if (playerOneItem == "BATU" && playerTwoItem == "GUNTING") {
-            mGameplayViewModel.addScore(playerOne)
-            Log.d("TAG", "p1:${mGameplayViewModel.getScore(playerOne)} & p2:${mGameplayViewModel.getScore(playerTwo)}")
-            playerOneWinText
-        } else {
-            mGameplayViewModel.addScore(playerTwo)
-            Log.d("TAG", "p1:${mGameplayViewModel.getScore(playerOne)} & p2:${mGameplayViewModel.getScore(playerTwo)}")
-            playerTwoWinText
-        }
+       return mGameplayViewModel.calculateResult(playerOne, playerTwo)
     }
 
     private fun saveGameDataToHistory() {
