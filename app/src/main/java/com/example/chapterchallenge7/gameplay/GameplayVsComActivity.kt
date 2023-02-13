@@ -80,6 +80,14 @@ class GameplayVsComActivity : AppCompatActivity(), GameResultDialogFragment.Resu
         }
     }
 
+    private fun showWinnerSoundEffect() {
+        if (mGameplayViewModel.getPlayerOneResult()) {
+            // code to show win sound effect
+        } else {
+            // code to show lose sound effect
+        }
+    }
+
 
     private fun chooseRandomItem(): View {
 
@@ -152,6 +160,7 @@ class GameplayVsComActivity : AppCompatActivity(), GameResultDialogFragment.Resu
 
     private fun showGameResult() {
         showGameResultDialog()
+        showWinnerSoundEffect()
         showTextOfPlayerChosenItem()
     }
 
