@@ -52,7 +52,7 @@ class LoginActivity : AppCompatActivity() {
                     Status.SUCCESS -> {
                         binding.btnLogin.visibility = View.VISIBLE
                         binding.pbLoading.visibility = View.GONE
-                        startActivity(Intent(this,MainMenuActivity::class.java))
+                        startActivity(Intent(this, MainMenuActivity::class.java))
                     }
                     Status.LOADING -> {
                         binding.btnLogin.visibility = View.GONE
@@ -75,7 +75,6 @@ class LoginActivity : AppCompatActivity() {
     private fun enableButton() {
         val email = binding.etEmailLogin.text.toString()
         val password = binding.etLoginPassword.text.toString()
-
         binding.btnLogin.isEnabled = email.isNotEmpty() && password.isNotEmpty()
     }
 }
