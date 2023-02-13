@@ -30,12 +30,12 @@
         android:textColor="@color/white"
         android:fontFamily="@font/inika"
         android:textSize="14sp"
-        app:layout_constraintBottom_toTopOf="@id/et_username"
+        app:layout_constraintBottom_toTopOf="@id/et_email_login"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"/>
 
     <androidx.appcompat.widget.AppCompatEditText
-        android:id="@+id/et_username"
+        android:id="@+id/et_email_login"
         android:layout_width="266dp"
         android:layout_height="47dp"
         android:layout_marginTop="156dp"

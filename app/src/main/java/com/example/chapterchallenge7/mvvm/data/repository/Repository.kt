@@ -20,6 +20,7 @@ class Repository(private val api: ApiService, private val sharedPreferences: Sha
         sharedPreferences.edit().apply {
             putString("token", data.token).apply()
             putString("id", data.id).apply()
+            putString("email", data.email).apply()
             putString("username", data.username).apply()
         }
     }

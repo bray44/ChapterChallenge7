@@ -27,14 +27,15 @@ class SignUpScreenActivity : AppCompatActivity() {
         binding = ActivitySignUpScreenBinding.inflate(layoutInflater)
         viewModel = RegisterViewModel(
             Repository(
-                RetrofitBuilder.apiService(sharedPreferences),
-                sharedPreferences
+                api = RetrofitBuilder.apiService(sharedPreferences),
+                sharedPreferences = sharedPreferences
             )
         )
         setContentView(binding.root)
 
         binding.btnSignup.setOnClickListener {
             viewModel.register(
+                email = binding.etEmail.text.toString(),
                 password = binding.etSignupPassword.text.toString(),
                 username = binding.etSignupName.text.toString(),
             ).observe(this) {
@@ -45,6 +46,7 @@ class SignUpScreenActivity : AppCompatActivity() {
                         Snackbar.make(
                             binding.root, it.data?.data?.id.orEmpty(), Snackbar.LENGTH_INDEFINITE
                         ).show()
+                        startActivity(Intent(this, LoginActivity::class.java))
                     }
                     Status.LOADING -> {
                         binding.btnSignup.visibility = View.GONE

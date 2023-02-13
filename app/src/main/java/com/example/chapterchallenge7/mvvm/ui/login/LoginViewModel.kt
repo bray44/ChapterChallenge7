@@ -9,15 +9,14 @@ import com.example.chapterchallenge7.mvvm.data.repository.Repository
 import com.example.chapterchallenge7.mvvm.utils.Resource
 import com.example.chapterchallenge7.mvvm.utils.errorResponse
 import kotlinx.coroutines.Dispatchers
-import okhttp3.Dispatcher
 
 class LoginViewModel(private val repository: Repository):ViewModel() {
-    fun login(username : String, password : String): LiveData<Resource<LoginResponse>>{
+    fun login(email : String, password : String): LiveData<Resource<LoginResponse>>{
         return liveData(Dispatchers.IO){
             emit(Resource.loading(data = null))
             try {
                 val body = LoginRequest(
-                    username = username,
+                    email = email,
                     password = password
                 )
                 emit(Resource.success(repository.login(body)))
