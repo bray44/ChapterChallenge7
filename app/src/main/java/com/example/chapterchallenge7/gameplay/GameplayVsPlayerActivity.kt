@@ -56,8 +56,8 @@ class GameplayVsPlayerActivity : AppCompatActivity(),
             loaded = true
         }
 
-        val soundWin = soundPool.load(this, R.raw.Win, 1)
-        val soundLose = soundPool.load(this, R.raw.Lose, 1)
+        val soundWin = soundPool.load(this, R.raw.win, 1)
+        val soundLose = soundPool.load(this, R.raw.lose, 1)
 
         mGameplayViewModel = ViewModelProvider(this)[GameplayViewModel::class.java]
 
