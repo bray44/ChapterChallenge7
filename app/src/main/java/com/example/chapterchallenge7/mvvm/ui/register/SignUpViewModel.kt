@@ -3,14 +3,14 @@ package com.example.chapterchallenge7.mvvm.ui.register
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
-import com.example.chapterchallenge7.mvvm.data.model.RegisterRequest
+import com.example.chapterchallenge7.mvvm.data.model.SignUpRequest
 import com.example.chapterchallenge7.mvvm.data.model.RegisterResponse
 import com.example.chapterchallenge7.mvvm.data.repository.Repository
 import com.example.chapterchallenge7.mvvm.utils.Resource
 import com.example.chapterchallenge7.mvvm.utils.errorResponse
 import kotlinx.coroutines.Dispatchers
 
-class RegisterViewModel(private val repository: Repository) : ViewModel() {
+class SignUpViewModel(private val repository: Repository) : ViewModel() {
     fun register(
         username: String,
         email: String,
@@ -19,7 +19,7 @@ class RegisterViewModel(private val repository: Repository) : ViewModel() {
         return liveData(Dispatchers.IO) {
             emit(Resource.loading(data = null))
             try {
-                val body = RegisterRequest(
+                val body = SignUpRequest(
                     email = email,
                     username = username,
                     password = password

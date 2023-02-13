@@ -6,7 +6,7 @@ import com.example.chapterchallenge7.mvvm.data.model.*
 
 class Repository(private val api: ApiService, private val sharedPreferences: SharedPreferences) {
 
-    suspend fun register(body: RegisterRequest): RegisterResponse {
+    suspend fun register(body: SignUpRequest): RegisterResponse {
         return api.register(body)
     }
 

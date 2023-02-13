@@ -5,19 +5,17 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
-import androidx.core.widget.doAfterTextChanged
-import com.example.chapterchallenge7.R
 import com.example.chapterchallenge7.databinding.ActivitySignUpScreenBinding
 import com.example.chapterchallenge7.login.LoginActivity
 import com.example.chapterchallenge7.mvvm.data.api.RetrofitBuilder
 import com.example.chapterchallenge7.mvvm.data.repository.Repository
-import com.example.chapterchallenge7.mvvm.ui.register.RegisterViewModel
+import com.example.chapterchallenge7.mvvm.ui.register.SignUpViewModel
 import com.example.chapterchallenge7.mvvm.utils.Status
 import com.google.android.material.snackbar.Snackbar
 
 class SignUpScreenActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySignUpScreenBinding
-    private lateinit var viewModel: RegisterViewModel
+    private lateinit var viewModel: SignUpViewModel
     private val sharedPreferences by lazy {
         applicationContext.getSharedPreferences("AUTHENTICATION", MODE_PRIVATE)
     }
@@ -25,7 +23,7 @@ class SignUpScreenActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySignUpScreenBinding.inflate(layoutInflater)
-        viewModel = RegisterViewModel(
+        viewModel = SignUpViewModel(
             Repository(
                 api = RetrofitBuilder.apiService(sharedPreferences),
                 sharedPreferences = sharedPreferences
