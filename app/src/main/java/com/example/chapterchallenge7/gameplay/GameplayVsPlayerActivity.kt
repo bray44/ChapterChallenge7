@@ -121,6 +121,14 @@ class GameplayVsPlayerActivity : AppCompatActivity(),
         }
     }
 
+    private fun showWinnerSoundEffect() {
+        if (mGameplayViewModel.getPlayerOneResult()) {
+            // code to show win sound effect
+        } else {
+            // code to show lose sound effect
+        }
+    }
+
     private fun playerOneItemsIsEnabled(boolean: Boolean) {
         binding.clPlayerOneItemList.forEach { it.isEnabled = boolean }
     }
@@ -186,6 +194,7 @@ class GameplayVsPlayerActivity : AppCompatActivity(),
 
     private fun showGameResult() {
         showGameResultDialog()
+        showWinnerSoundEffect()
         showTextOfPlayerChosenItem()
     }
 

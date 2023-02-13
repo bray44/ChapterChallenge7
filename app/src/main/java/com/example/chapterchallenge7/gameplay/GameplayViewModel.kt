@@ -5,6 +5,10 @@ import androidx.lifecycle.AndroidViewModel
 
 class GameplayViewModel(application: Application): AndroidViewModel(application) {
 
+    // This variable purpose is to give data to Sound Effect Winner
+    var playerOneWin = true
+
+
     fun createGameplayData(name: String): GameplayData {
         return GameplayData(name, getApplication())
     }
@@ -35,7 +39,42 @@ class GameplayViewModel(application: Application): AndroidViewModel(application)
         player.saveInt("SCORE", 0)
     }
 
+    fun getPlayerOneResult(): Boolean {
+        return playerOneWin
+    }
 
+    private fun isPlayerOneWin(value: Boolean) {
+        playerOneWin = value
+    }
+
+    fun calculateResult(playerOne: GameplayData, playerTwo: GameplayData): String {
+
+        val playerOneItem = getItem(playerOne)
+        val playerTwoItem = getItem(playerTwo)
+        val playerOneWinText = "${getName(playerOne, "Player 1")}\n MENANG!"
+        val playerTwoWinText = "${getName(playerTwo, "Player 2")}\n MENANG!"
+
+        return if (playerOneItem == playerTwoItem) {
+            isPlayerOneWin(false)
+            "DRAW!"
+        } else if (playerOneItem == "KERTAS" && playerTwoItem == "BATU") {
+            addScore(playerOne)
+            isPlayerOneWin(true)
+            playerOneWinText
+        } else if (playerOneItem == "GUNTING" && playerTwoItem == "KERTAS") {
+            addScore(playerOne)
+            isPlayerOneWin(true)
+            playerOneWinText
+        } else if (playerOneItem == "BATU" && playerTwoItem == "GUNTING") {
+            addScore(playerOne)
+            isPlayerOneWin(true)
+            playerOneWinText
+        } else {
+            addScore(playerTwo)
+            isPlayerOneWin(false)
+            playerTwoWinText
+        }
+    }
 
 
 
