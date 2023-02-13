@@ -156,7 +156,6 @@ class GameplayVsPlayerActivity : AppCompatActivity(),
         }
 
         binding.ivPlayerModeButton.setOnClickListener {
-            builderForPlayerModeButton.show()
             if (binding.tvPlayerOneMessage.text == "") {
                 builderForPlayerModeButton.show()
             } else {
