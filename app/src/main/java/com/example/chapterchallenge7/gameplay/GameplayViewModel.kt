@@ -5,8 +5,6 @@ import androidx.lifecycle.AndroidViewModel
 
 class GameplayViewModel(application: Application): AndroidViewModel(application) {
 
-    // This variable purpose is to give data to Sound Effect Winner
-    private var playerOneWin = true
 
 
     fun createGameplayData(name: String): GameplayData {
@@ -40,13 +38,13 @@ class GameplayViewModel(application: Application): AndroidViewModel(application)
     }
 
 
-    fun getPlayerOneResult(player: GameplayData): Boolean {
-        return player.getBoolean("WINNER", true)
+    fun getPlayerOneResult(player: GameplayData): Int? {
+        return player.getInt("WINNER", 1)
     }
 
 
-    private fun isPlayerOneWin(player: GameplayData, value: Boolean) {
-        player.saveBoolean("WINNER", value)
+    private fun isPlayerOneWin(player: GameplayData, value: Int) {
+        player.saveInt("WINNER", value)
     }
 
     fun calculateResult(playerOne: GameplayData, playerTwo: GameplayData): String {
@@ -57,23 +55,23 @@ class GameplayViewModel(application: Application): AndroidViewModel(application)
         val playerTwoWinText = "${getName(playerTwo, "Player 2")}\n MENANG!"
 
         return if (playerOneItem == playerTwoItem) {
-            isPlayerOneWin(playerOne, false)
+            isPlayerOneWin(playerOne, 0)
             "DRAW!"
         } else if (playerOneItem == "KERTAS" && playerTwoItem == "BATU") {
             addScore(playerOne)
-            isPlayerOneWin(playerOne,true)
+            isPlayerOneWin(playerOne,1)
             playerOneWinText
         } else if (playerOneItem == "GUNTING" && playerTwoItem == "KERTAS") {
             addScore(playerOne)
-            isPlayerOneWin(playerOne,true)
+            isPlayerOneWin(playerOne,1)
             playerOneWinText
         } else if (playerOneItem == "BATU" && playerTwoItem == "GUNTING") {
             addScore(playerOne)
-            isPlayerOneWin(playerOne,true)
+            isPlayerOneWin(playerOne,1)
             playerOneWinText
         } else {
             addScore(playerTwo)
-            isPlayerOneWin(playerOne,false)
+            isPlayerOneWin(playerOne,0)
             playerTwoWinText
         }
     }

@@ -66,13 +66,13 @@ class GameplayVsComActivity : AppCompatActivity(), GameResultDialogFragment.Resu
         val soundLose = soundPool.load(this, R.raw.lose, 1)
 
         fun showWinnerSoundEffect() {
-            if (mGameplayViewModel.getPlayerOneResult(playerOne)) {
-                Log.d("SOUND", "SUARA MENANGGGGG")
+            if (mGameplayViewModel.getPlayerOneResult(playerOne) == 1) {
+                Log.d("SOUND", "SUARA MENANG")
                 if (loaded) {
                     soundPool.play(soundWin, volume, volume, 1, 0, 1F)
                 }
-            } else if (!mGameplayViewModel.getPlayerOneResult(playerOne)) {
-                Log.d("SOUND", "SUARA KALAHHH")
+            } else  {
+                Log.d("SOUND", "SUARA KALAH")
                 if (loaded) {
                     soundPool.play(soundLose, volume, volume, 1, 0, 1F)
                 }

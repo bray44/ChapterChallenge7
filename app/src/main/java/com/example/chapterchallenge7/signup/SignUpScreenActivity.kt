@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.core.widget.doAfterTextChanged
 import com.example.chapterchallenge7.databinding.ActivitySignUpScreenBinding
 import com.example.chapterchallenge7.login.LoginActivity
 import com.example.chapterchallenge7.mvvm.data.api.RetrofitBuilder

@@ -86,12 +86,12 @@ class GameplayVsPlayerActivity : AppCompatActivity(),
         }
 
         fun showWinnerSoundEffect() {
-            if (mGameplayViewModel.getPlayerOneResult(playerOne)) {
+            if (mGameplayViewModel.getPlayerOneResult(playerOne) == 1) {
                 Log.d("SOUND", "SUARA MENANGGGGG")
                 if (loaded) {
                     soundPool.play(soundWin, volume, volume, 1, 0, 1F)
                 }
-            } else if (!mGameplayViewModel.getPlayerOneResult(playerOne)) {
+            } else {
                 Log.d("SOUND", "SUARA KALAHHH")
                 if (loaded) {
                     soundPool.play(soundLose, volume, volume, 1, 0, 1F)

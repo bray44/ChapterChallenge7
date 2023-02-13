@@ -28,14 +28,7 @@ class GameplayData(name: String, context: Context) {
         sharedPref.edit().putInt(key, value).apply()
     }
 
-    fun getBoolean(key: String, defaultValue: Boolean): Boolean {
-        return sharedPref.getBoolean(key, defaultValue)
-    }
 
-    // Method akan digunakan untuk menyimpan nama player dan item
-    fun saveBoolean(key: String, value: Boolean) {
-        sharedPref.edit().putBoolean(key, value).apply()
-    }
 
 
 }
