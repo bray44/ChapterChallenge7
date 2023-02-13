@@ -138,8 +138,6 @@ class GameplayVsPlayerActivity : AppCompatActivity(),
         val maxVolume = audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC).toFloat()
         val volume = actualVolume / maxVolume
 
-
-
         val audioAttribute = AudioAttributes.Builder()
             .setUsage(AudioAttributes.USAGE_GAME)
             .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
@@ -160,11 +158,9 @@ class GameplayVsPlayerActivity : AppCompatActivity(),
         if (mGameplayViewModel.getPlayerOneResult()) {
             // code to show win sound effect
             soundPool.play(soundWin, volume, volume, 1, 0, 1F)
-            Log.d("TAG","cek ah")
         } else {
             // code to show lose sound effect
             soundPool.play(soundLose, volume, volume, 1, 0, 1F)
-            Log.d("TAG","cek ah 2")
         }
     }
 
