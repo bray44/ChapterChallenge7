@@ -7,6 +7,7 @@ import android.media.AudioManager
 import android.media.SoundPool
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
@@ -16,6 +17,7 @@ import com.example.chapterchallenge7.R
 import com.example.chapterchallenge7.databinding.ActivityGameplayVsPlayerBinding
 import com.example.chapterchallenge7.mainmenu.MainMenuActivity
 import com.example.chapterchallenge7.playermode.PlayerModeActivity
+import kotlin.math.log
 import kotlin.random.Random
 
 class GameplayVsPlayerActivity : AppCompatActivity(),
@@ -23,7 +25,7 @@ class GameplayVsPlayerActivity : AppCompatActivity(),
 
     private lateinit var soundPool: SoundPool
     private val MAX_STREAM = 1
-    private var loaded = false
+    private var loaded = true
 
     private lateinit var binding: ActivityGameplayVsPlayerBinding
     private lateinit var mGameplayViewModel: GameplayViewModel
@@ -34,30 +36,7 @@ class GameplayVsPlayerActivity : AppCompatActivity(),
         binding = ActivityGameplayVsPlayerBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val audioManager = getSystemService(AUDIO_SERVICE) as AudioManager
-        val actualVolume = audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC).toFloat()
-        val maxVolume = audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC).toFloat()
-        val volume = actualVolume / maxVolume
 
-
-
-        val audioAttribute = AudioAttributes.Builder()
-            .setUsage(AudioAttributes.USAGE_GAME)
-            .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
-            .build()
-
-        val builder = SoundPool.Builder()
-        builder.setAudioAttributes(audioAttribute).setMaxStreams(MAX_STREAM)
-        soundPool = builder.build()
-
-
-
-        soundPool.setOnLoadCompleteListener { _, _, _ ->
-            loaded = true
-        }
-
-        val soundWin = soundPool.load(this, R.raw.win, 1)
-        val soundLose = soundPool.load(this, R.raw.lose, 1)
 
         mGameplayViewModel = ViewModelProvider(this)[GameplayViewModel::class.java]
 
@@ -154,10 +133,38 @@ class GameplayVsPlayerActivity : AppCompatActivity(),
     }
 
     private fun showWinnerSoundEffect() {
+        val audioManager = getSystemService(AUDIO_SERVICE) as AudioManager
+        val actualVolume = audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC).toFloat()
+        val maxVolume = audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC).toFloat()
+        val volume = actualVolume / maxVolume
+
+
+
+        val audioAttribute = AudioAttributes.Builder()
+            .setUsage(AudioAttributes.USAGE_GAME)
+            .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
+            .build()
+
+        val builder = SoundPool.Builder()
+        builder.setAudioAttributes(audioAttribute).setMaxStreams(MAX_STREAM)
+        soundPool = builder.build()
+
+
+
+        soundPool.setOnLoadCompleteListener { _, _, _ ->
+            loaded = true
+        }
+
+        val soundWin = soundPool.load(this, R.raw.win, 1)
+        val soundLose = soundPool.load(this, R.raw.lose, 1)
         if (mGameplayViewModel.getPlayerOneResult()) {
             // code to show win sound effect
+            soundPool.play(soundWin, volume, volume, 1, 0, 1F)
+            Log.d("TAG","cek ah")
         } else {
             // code to show lose sound effect
+            soundPool.play(soundLose, volume, volume, 1, 0, 1F)
+            Log.d("TAG","cek ah 2")
         }
     }
 
