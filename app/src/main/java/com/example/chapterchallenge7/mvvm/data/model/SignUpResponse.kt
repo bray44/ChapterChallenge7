@@ -10,6 +10,6 @@ data class RegisterResponse(
 data class RegisterData(
     @SerializedName("_id") var id: String,
     @SerializedName("username") var username: String,
-    @SerializedName("password") var email: String,
+    @SerializedName("email") var email: String
 )
 

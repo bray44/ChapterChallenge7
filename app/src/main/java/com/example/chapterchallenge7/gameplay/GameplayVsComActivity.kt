@@ -7,6 +7,7 @@ import android.media.AudioManager
 import android.media.SoundPool
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.core.view.forEach
@@ -40,6 +41,44 @@ class GameplayVsComActivity : AppCompatActivity(), GameResultDialogFragment.Resu
         mGameplayViewModel.getName(playerOne, "Player 1")
         mGameplayViewModel.getName(playerTwo, "COM")
 
+        val audioManager = getSystemService(AUDIO_SERVICE) as AudioManager
+        val actualVolume = audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC).toFloat()
+        val maxVolume = audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC).toFloat()
+        val volume = actualVolume / maxVolume
+
+
+        val audioAttribute = AudioAttributes.Builder()
+            .setUsage(AudioAttributes.USAGE_GAME)
+            .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
+            .build()
+
+        val builder = SoundPool.Builder()
+        builder.setAudioAttributes(audioAttribute).setMaxStreams(MAX_STREAM)
+        soundPool = builder.build()
+
+
+
+        soundPool.setOnLoadCompleteListener { _, _, _ ->
+            loaded = true
+        }
+
+        val soundWin = soundPool.load(this, R.raw.win, 1)
+        val soundLose = soundPool.load(this, R.raw.lose, 1)
+
+        fun showWinnerSoundEffect() {
+            if (mGameplayViewModel.getPlayerOneResult(playerOne)) {
+                Log.d("SOUND", "SUARA MENANGGGGG")
+                if (loaded) {
+                    soundPool.play(soundWin, volume, volume, 1, 0, 1F)
+                }
+            } else if (!mGameplayViewModel.getPlayerOneResult(playerOne)) {
+                Log.d("SOUND", "SUARA KALAHHH")
+                if (loaded) {
+                    soundPool.play(soundLose, volume, volume, 1, 0, 1F)
+                }
+            }
+        }
+
 
         binding.tvPlayerOneName.text = mGameplayViewModel.getName(playerOne, "Player 1")
         resetGameText()
@@ -49,6 +88,7 @@ class GameplayVsComActivity : AppCompatActivity(), GameResultDialogFragment.Resu
             setChosenItemTo(playerOne)
             playerTwoChoosingItem()
             showGameResult()
+            showWinnerSoundEffect()
             allPlayersItemsIsEnabled(false)
         }
 
@@ -86,42 +126,11 @@ class GameplayVsComActivity : AppCompatActivity(), GameResultDialogFragment.Resu
             resetGameText()
             resetAllItems()
         }
+
+
     }
 
-    private fun showWinnerSoundEffect() {
-        val audioManager = getSystemService(AUDIO_SERVICE) as AudioManager
-        val actualVolume = audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC).toFloat()
-        val maxVolume = audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC).toFloat()
-        val volume = actualVolume / maxVolume
 
-
-
-        val audioAttribute = AudioAttributes.Builder()
-            .setUsage(AudioAttributes.USAGE_GAME)
-            .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
-            .build()
-
-        val builder = SoundPool.Builder()
-        builder.setAudioAttributes(audioAttribute).setMaxStreams(MAX_STREAM)
-        soundPool = builder.build()
-
-
-
-        soundPool.setOnLoadCompleteListener { _, _, _ ->
-            loaded = true
-        }
-
-        val soundWin = soundPool.load(this, R.raw.win, 1)
-        val soundLose = soundPool.load(this, R.raw.lose, 1)
-
-        if (mGameplayViewModel.getPlayerOneResult()) {
-            // code to show win sound effect
-            soundPool.play(soundWin, volume, volume, 1, 0, 1F)
-        } else {
-            // code to show lose sound effect
-            soundPool.play(soundLose, volume, volume, 1, 0, 1F)
-        }
-    }
 
 
     private fun chooseRandomItem(): View {
@@ -195,7 +204,6 @@ class GameplayVsComActivity : AppCompatActivity(), GameResultDialogFragment.Resu
 
     private fun showGameResult() {
         showGameResultDialog()
-        showWinnerSoundEffect()
         showTextOfPlayerChosenItem()
     }
 

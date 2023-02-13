@@ -16,6 +16,43 @@
         android:textColor="@color/white"
         android:textSize="16sp"
         android:textStyle="bold"
+        android:textAlignment="center"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/et_signup_name"
+        android:layout_width="266dp"
+        android:layout_height="47dp"
+        android:layout_marginTop="256dp"
+        android:background="@drawable/btn_background2"
+        android:inputType="text"
+        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ProgressBar
+        android:id="@+id/pb_loading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_signup"
+        tools:visibility="visible" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/et_signup_password"
+        android:layout_width="266dp"
+        android:layout_height="47dp"
+        android:layout_marginTop="340dp"
+        android:background="@drawable/btn_background2"
+        android:inputType="textPassword"
+        app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -32,64 +69,55 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintStart_toStartOf="@+id/et_signup_name" />
 
-    <androidx.appcompat.widget.AppCompatEditText
-        android:id="@+id/et_signup_name"
-        android:layout_width="266dp"
-        android:layout_height="47dp"
-        android:layout_marginTop="156dp"
-        android:layout_marginBottom="150dp"
-        android:background="@drawable/btn_background2"
-        android:inputType="text"
+    <Button
+        android:id="@+id/btn_signup"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/btn_background1"
+        android:fontFamily="@font/inika"
+        android:text="Daftar"
+        android:textAllCaps="false"
+        app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/et_signup_password" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="80dp"
-        android:layout_marginEnd="271dp"
         android:fontFamily="@font/inika"
         android:padding="8dp"
         android:text="@string/kata_sandi"
         android:textColor="@color/white"
         android:textSize="14sp"
         app:layout_constraintBottom_toTopOf="@id/et_signup_password"
+        app:layout_constraintHorizontal_bias="0.206"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent" />
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/et_signup_password" />
 
     <androidx.appcompat.widget.AppCompatEditText
-        android:id="@+id/et_signup_password"
+        android:id="@+id/et_email"
         android:layout_width="266dp"
         android:layout_height="47dp"
-        android:layout_marginTop="240dp"
+        android:layout_marginTop="130dp"
         android:background="@drawable/btn_background2"
-        android:inputType="textPassword"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/et_signup_name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/btn_signup"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
-        android:background="@drawable/btn_background1"
-        android:fontFamily="@font/inika"
-        android:text="Daftar"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/et_signup_password"
-        android:textAllCaps="false"/>
-
-    <ProgressBar
-        android:id="@+id/pb_loading"
+    <TextView
+        android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
-        android:visibility="gone"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/et_signup_password" />
+        android:text="E-mail"
+        android:fontFamily="@font/inika"
+        android:padding="8dp"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/et_email"
+        app:layout_constraintStart_toStartOf="@+id/et_email" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
