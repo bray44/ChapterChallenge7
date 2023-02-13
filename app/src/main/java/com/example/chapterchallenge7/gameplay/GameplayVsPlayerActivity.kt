@@ -46,6 +46,29 @@ class GameplayVsPlayerActivity : AppCompatActivity(),
         mGameplayViewModel.getName(playerOne, "Player 1")
         mGameplayViewModel.getName(playerTwo, "Player 2")
 
+        val audioManager = getSystemService(AUDIO_SERVICE) as AudioManager
+        val actualVolume = audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC).toFloat()
+        val maxVolume = audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC).toFloat()
+        val volume = actualVolume / maxVolume
+
+        val audioAttribute = AudioAttributes.Builder()
+            .setUsage(AudioAttributes.USAGE_GAME)
+            .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
+            .build()
+
+        val builder = SoundPool.Builder()
+        builder.setAudioAttributes(audioAttribute).setMaxStreams(MAX_STREAM)
+        soundPool = builder.build()
+
+
+
+        soundPool.setOnLoadCompleteListener { _, _, _ ->
+            loaded = true
+        }
+
+        val soundWin = soundPool.load(this, R.raw.win, 1)
+        val soundLose = soundPool.load(this, R.raw.lose, 1)
+
         binding.tvPlayerOneName.text = mGameplayViewModel.getName(playerOne, "Player 1")
         resetGameText()
 
@@ -62,6 +85,20 @@ class GameplayVsPlayerActivity : AppCompatActivity(),
             }
         }
 
+        fun showWinnerSoundEffect() {
+            if (mGameplayViewModel.getPlayerOneResult(playerOne)) {
+                Log.d("SOUND", "SUARA MENANGGGGG")
+                if (loaded) {
+                    soundPool.play(soundWin, volume, volume, 1, 0, 1F)
+                }
+            } else if (!mGameplayViewModel.getPlayerOneResult(playerOne)) {
+                Log.d("SOUND", "SUARA KALAHHH")
+                if (loaded) {
+                    soundPool.play(soundLose, volume, volume, 1, 0, 1F)
+                }
+            }
+        }
+
         val listenerForPlayerTwo = View.OnClickListener { view ->
 
             if (binding.tvPlayerTwoMessage.text == "") {
@@ -71,6 +108,7 @@ class GameplayVsPlayerActivity : AppCompatActivity(),
                 view.isSelected = true
                 setChosenItemTo(playerTwo)
                 showGameResult()
+                showWinnerSoundEffect()
                 allPlayersItemsIsEnabled(false)
             }
         }
@@ -82,6 +120,8 @@ class GameplayVsPlayerActivity : AppCompatActivity(),
         binding.ivPlayerTwoBatu.setOnClickListener(listenerForPlayerTwo)
         binding.ivPlayerTwoKertas.setOnClickListener(listenerForPlayerTwo)
         binding.ivPlayerTwoGunting.setOnClickListener(listenerForPlayerTwo)
+
+
 
         val builderForHomeButton = AlertDialog.Builder(this)
             .setTitle("PERINGATAN")
@@ -116,7 +156,6 @@ class GameplayVsPlayerActivity : AppCompatActivity(),
         }
 
         binding.ivPlayerModeButton.setOnClickListener {
-            builderForPlayerModeButton.show()
             if (binding.tvPlayerOneMessage.text == "") {
                 builderForPlayerModeButton.show()
             } else {
@@ -130,43 +169,11 @@ class GameplayVsPlayerActivity : AppCompatActivity(),
             resetGameText()
             resetAllItems()
         }
+
+
     }
 
-    private fun showWinnerSoundEffect() {
-        val audioManager = getSystemService(AUDIO_SERVICE) as AudioManager
-        val actualVolume = audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC).toFloat()
-        val maxVolume = audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC).toFloat()
-        val volume = actualVolume / maxVolume
 
-
-
-        val audioAttribute = AudioAttributes.Builder()
-            .setUsage(AudioAttributes.USAGE_GAME)
-            .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
-            .build()
-
-        val builder = SoundPool.Builder()
-        builder.setAudioAttributes(audioAttribute).setMaxStreams(MAX_STREAM)
-        soundPool = builder.build()
-
-
-
-        soundPool.setOnLoadCompleteListener { _, _, _ ->
-            loaded = true
-        }
-
-        val soundWin = soundPool.load(this, R.raw.win, 1)
-        val soundLose = soundPool.load(this, R.raw.lose, 1)
-        if (mGameplayViewModel.getPlayerOneResult()) {
-            // code to show win sound effect
-            soundPool.play(soundWin, volume, volume, 1, 0, 1F)
-            Log.d("TAG","cek ah")
-        } else {
-            // code to show lose sound effect
-            soundPool.play(soundLose, volume, volume, 1, 0, 1F)
-            Log.d("TAG","cek ah 2")
-        }
-    }
 
     private fun playerOneItemsIsEnabled(boolean: Boolean) {
         binding.clPlayerOneItemList.forEach { it.isEnabled = boolean }
@@ -233,7 +240,6 @@ class GameplayVsPlayerActivity : AppCompatActivity(),
 
     private fun showGameResult() {
         showGameResultDialog()
-        showWinnerSoundEffect()
         showTextOfPlayerChosenItem()
     }
 
