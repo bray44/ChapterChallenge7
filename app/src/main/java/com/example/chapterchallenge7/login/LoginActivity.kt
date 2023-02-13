@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.core.widget.doAfterTextChanged
 import androidx.lifecycle.ViewModel
 import com.example.chapterchallenge7.R
@@ -14,6 +15,7 @@ import com.example.chapterchallenge7.mvvm.data.api.RetrofitBuilder
 import com.example.chapterchallenge7.mvvm.data.repository.Repository
 import com.example.chapterchallenge7.mvvm.ui.login.LoginViewModel
 import com.example.chapterchallenge7.mvvm.utils.Status
+import com.example.chapterchallenge7.signup.SignUpScreenActivity
 import retrofit2.Retrofit
 
 class LoginActivity : AppCompatActivity() {
@@ -35,7 +37,7 @@ class LoginActivity : AppCompatActivity() {
         setContentView(binding.root)
         enableButton()
 
-        binding.etUsername.doAfterTextChanged {
+        binding.etEmailLogin.doAfterTextChanged {
             enableButton()
         }
         binding.etLoginPassword.doAfterTextChanged {
@@ -43,8 +45,8 @@ class LoginActivity : AppCompatActivity() {
         }
         binding.btnLogin.setOnClickListener {
             viewModel.login(
-                username = binding.etUsername.toString(),
-                password = binding.etLoginPassword.toString(),
+                email = binding.etEmailLogin.text.toString(),
+                password = binding.etLoginPassword.text.toString(),
             ).observe(this){
                 when(it.status){
                     Status.SUCCESS -> {
@@ -59,14 +61,19 @@ class LoginActivity : AppCompatActivity() {
                     Status.ERROR -> {
                         binding.btnLogin.visibility = View.VISIBLE
                         binding.pbLoading.visibility = View.GONE
+                        Toast.makeText(this, it.message, Toast.LENGTH_LONG).show()
                     }
                 }
             }
         }
+
+        binding.tvDaftar.setOnClickListener {
+            startActivity(Intent(this, SignUpScreenActivity::class.java))
+        }
     }
 
     private fun enableButton() {
-        val email = binding.etUsername.text.toString()
+        val email = binding.etEmailLogin.text.toString()
         val password = binding.etLoginPassword.text.toString()
 
         binding.btnLogin.isEnabled = email.isNotEmpty() && password.isNotEmpty()

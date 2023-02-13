@@ -5,19 +5,17 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
-import androidx.core.widget.doAfterTextChanged
-import com.example.chapterchallenge7.R
 import com.example.chapterchallenge7.databinding.ActivitySignUpScreenBinding
 import com.example.chapterchallenge7.login.LoginActivity
 import com.example.chapterchallenge7.mvvm.data.api.RetrofitBuilder
 import com.example.chapterchallenge7.mvvm.data.repository.Repository
-import com.example.chapterchallenge7.mvvm.ui.register.RegisterViewModel
+import com.example.chapterchallenge7.mvvm.ui.register.SignUpViewModel
 import com.example.chapterchallenge7.mvvm.utils.Status
 import com.google.android.material.snackbar.Snackbar
 
 class SignUpScreenActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySignUpScreenBinding
-    private lateinit var viewModel: RegisterViewModel
+    private lateinit var viewModel: SignUpViewModel
     private val sharedPreferences by lazy {
         applicationContext.getSharedPreferences("AUTHENTICATION", MODE_PRIVATE)
     }
@@ -25,16 +23,17 @@ class SignUpScreenActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySignUpScreenBinding.inflate(layoutInflater)
-        viewModel = RegisterViewModel(
+        viewModel = SignUpViewModel(
             Repository(
-                RetrofitBuilder.apiService(sharedPreferences),
-                sharedPreferences
+                api = RetrofitBuilder.apiService(sharedPreferences),
+                sharedPreferences = sharedPreferences
             )
         )
         setContentView(binding.root)
 
         binding.btnSignup.setOnClickListener {
             viewModel.register(
+                email = binding.etEmail.text.toString(),
                 password = binding.etSignupPassword.text.toString(),
                 username = binding.etSignupName.text.toString(),
             ).observe(this) {
@@ -45,6 +44,7 @@ class SignUpScreenActivity : AppCompatActivity() {
                         Snackbar.make(
                             binding.root, it.data?.data?.id.orEmpty(), Snackbar.LENGTH_INDEFINITE
                         ).show()
+                        startActivity(Intent(this, LoginActivity::class.java))
                     }
                     Status.LOADING -> {
                         binding.btnSignup.visibility = View.GONE
