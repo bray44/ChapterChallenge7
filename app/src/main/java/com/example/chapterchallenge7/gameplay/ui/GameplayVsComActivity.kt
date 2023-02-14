@@ -7,6 +7,7 @@ import android.media.AudioManager
 import android.media.SoundPool
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.view.View
 import android.widget.Toast
@@ -89,8 +90,14 @@ class GameplayVsComActivity : AppCompatActivity(), GameResultDialogFragment.Resu
             setChosenItemTo(playerOne)
             playerTwoChoosingItem()
             showGameResult()
-            showWinnerSoundEffect()
             allPlayersItemsIsEnabled(false)
+
+            /* The different lifecycle between this Activity and GameResultDialogFragment results
+                in this function always called first before the game even calculate the result, therefore the function decided to be delayed.*/
+            Handler().postDelayed({
+                showWinnerSoundEffect()
+            }, 300)
+
         }
 
         val listenerForPlayerTwo = View.OnClickListener {

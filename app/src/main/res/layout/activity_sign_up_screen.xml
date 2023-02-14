@@ -62,7 +62,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/inika"
         android:padding="8dp"
-        android:text="@string/Email"
+        android:text="Nama"
         android:textColor="@color/white"
         android:textSize="14sp"
         app:layout_constraintBottom_toTopOf="@+id/et_signup_name"
