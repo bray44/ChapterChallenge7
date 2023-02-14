@@ -3,10 +3,9 @@ package com.example.chapterchallenge7.playermode
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.example.chapterchallenge7.R
 import com.example.chapterchallenge7.databinding.ActivityPlayerModeBinding
-import com.example.chapterchallenge7.gameplay.GameplayVsComActivity
-import com.example.chapterchallenge7.gameplay.GameplayVsPlayerActivity
+import com.example.chapterchallenge7.gameplay.ui.GameplayVsComActivity
+import com.example.chapterchallenge7.gameplay.ui.GameplayVsPlayerActivity
 import com.example.chapterchallenge7.mainmenu.MainMenuActivity
 
 class PlayerModeActivity : AppCompatActivity() {

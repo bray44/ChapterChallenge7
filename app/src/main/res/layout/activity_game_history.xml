@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/dark_brown"
-    tools:context=".gamehistory.GameHistoryActivity">
+    tools:context=".gamehistory.ui.GameHistoryActivity">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_game_history"

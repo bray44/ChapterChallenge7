@@ -15,7 +15,7 @@
             android:name=".playermode.PlayerModeActivity"
             android:exported="false" />
         <activity
-            android:name=".login.LoginActivity"
+            android:name=".login.ui.LoginActivity"
             android:exported="true" />
         <activity
             android:name=".mainmenu.MainMenuActivity"
@@ -24,19 +24,19 @@
             android:name=".landingpage.LandingPageActivity"
             android:exported="false" />
         <activity
-            android:name=".gamehistory.GameHistoryActivity"
+            android:name=".gamehistory.ui.GameHistoryActivity"
             android:exported="true" />
         <activity
-            android:name=".gameplay.GameplayVsComActivity"
+            android:name=".gameplay.ui.GameplayVsComActivity"
             android:exported="true" />
         <activity
-            android:name=".gameplay.GameplayVsPlayerActivity"
+            android:name=".gameplay.ui.GameplayVsPlayerActivity"
             android:exported="true" />
         <activity
-            android:name=".signup.SignUpScreenActivity"
+            android:name=".signup.ui.SignUpScreenActivity"
             android:exported="false" />
         <activity
-            android:name=".splashscreen.SplashScreenActivity"
+            android:name=".splashscreen.ui.SplashScreenActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

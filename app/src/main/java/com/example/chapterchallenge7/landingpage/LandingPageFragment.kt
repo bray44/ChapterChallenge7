@@ -6,10 +6,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.chapterchallenge7.R
 import com.example.chapterchallenge7.databinding.FragmentLandingPageBinding
-import com.example.chapterchallenge7.login.LoginActivity
-import com.example.chapterchallenge7.signup.SignUpScreenActivity
+import com.example.chapterchallenge7.login.ui.LoginActivity
 
 private const val ARG_IMG = "IMAGE"
 private const val ARG_EDIT_TEXT = "TITLE"
@@ -52,7 +50,7 @@ class LandingPageFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.btnNext.setOnClickListener{
-            val intent = Intent(activity,LoginActivity::class.java)
+            val intent = Intent(activity, LoginActivity::class.java)
             startActivity(intent)
         }
         binding.btnNext.visibility = buttonVisibility!!
