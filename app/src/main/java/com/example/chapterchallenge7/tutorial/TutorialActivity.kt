@@ -17,6 +17,7 @@ class TutorialActivity : AppCompatActivity() {
 
         binding.activityTutorialBtnExit.setOnClickListener{
             startActivity(Intent(this, MainMenuActivity::class.java))
+            finish()
         }
     }
 

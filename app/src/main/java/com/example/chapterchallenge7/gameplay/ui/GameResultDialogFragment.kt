@@ -57,7 +57,7 @@ class GameResultDialogFragment : DialogFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         //Show winner name to dialog
-        binding.tvGameResultWinnerDialog.text = mGameplayViewModel.getGameResult(playerOne)
+        binding.tvGameResultWinnerDialog.text = calculateResult()
 
         //Show player score to dialog
         val playerOneScore = mGameplayViewModel.getScore(playerOne)

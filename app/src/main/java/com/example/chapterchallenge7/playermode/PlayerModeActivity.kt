@@ -20,6 +20,7 @@ class PlayerModeActivity : AppCompatActivity() {
 
         binding.ivClose.setOnClickListener {
             startActivity(Intent(this, MainMenuActivity::class.java))
+            finish()
         }
 
         binding.player.setOnClickListener {

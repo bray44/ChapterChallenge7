@@ -117,12 +117,14 @@ class GameplayVsComActivity : AppCompatActivity(), GameResultDialogFragment.Resu
         // Setting the logic for Home, Main Menu,& Replay button
         binding.ivHomeButton.setOnClickListener {
             startActivity(Intent(this, MainMenuActivity::class.java))
+            finish()
             mGameplayViewModel.resetScore(playerOne)
             mGameplayViewModel.resetScore(playerTwo)
         }
 
         binding.ivPlayerModeButton.setOnClickListener {
             startActivity(Intent(this, PlayerModeActivity::class.java))
+            finish()
             mGameplayViewModel.resetScore(playerOne)
             mGameplayViewModel.resetScore(playerTwo)
         }

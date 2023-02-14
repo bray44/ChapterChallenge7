@@ -138,6 +138,7 @@ class GameplayVsPlayerActivity : AppCompatActivity(),
                 startActivity(Intent(this, MainMenuActivity::class.java))
                 mGameplayViewModel.resetScore(playerOne)
                 mGameplayViewModel.resetScore(playerTwo)
+                this.finish()
             }
             .setNegativeButton("Tidak") { _, _ ->
             }.create()
@@ -149,6 +150,7 @@ class GameplayVsPlayerActivity : AppCompatActivity(),
                 startActivity(Intent(this, PlayerModeActivity::class.java))
                 mGameplayViewModel.resetScore(playerOne)
                 mGameplayViewModel.resetScore(playerTwo)
+                this.finish()
             }
             .setNegativeButton("Tidak") { _, _ ->
             }.create()
@@ -162,6 +164,7 @@ class GameplayVsPlayerActivity : AppCompatActivity(),
                 startActivity(Intent(this, MainMenuActivity::class.java))
                 mGameplayViewModel.resetScore(playerOne)
                 mGameplayViewModel.resetScore(playerTwo)
+                this.finish()
             }
         }
 
@@ -172,6 +175,7 @@ class GameplayVsPlayerActivity : AppCompatActivity(),
                 startActivity(Intent(this, PlayerModeActivity::class.java))
                 mGameplayViewModel.resetScore(playerOne)
                 mGameplayViewModel.resetScore(playerTwo)
+                this.finish()
             }
         }
 

@@ -43,6 +43,7 @@ class GameHistoryActivity : AppCompatActivity() {
 
         binding.btnClose.setOnClickListener {
             startActivity(Intent(this, MainMenuActivity::class.java))
+            finish()
         }
 
         binding.btnDeleteDataGameHistory.setOnClickListener {

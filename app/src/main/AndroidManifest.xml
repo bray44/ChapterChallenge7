@@ -16,7 +16,8 @@
             android:exported="false" />
         <activity
             android:name=".login.ui.LoginActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:launchMode="singleTask"/>
         <activity
             android:name=".mainmenu.MainMenuActivity"
             android:exported="true" />
