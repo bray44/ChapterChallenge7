@@ -1,4 +1,4 @@
-package com.example.chapterchallenge7.login
+package com.example.chapterchallenge7.login.ui
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity

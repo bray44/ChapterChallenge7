@@ -1,4 +1,4 @@
-package com.example.chapterchallenge7.gameplay
+package com.example.chapterchallenge7.gameplay.ui
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -18,8 +18,7 @@ import com.example.chapterchallenge7.databinding.ActivityGameplayVsPlayerBinding
 import com.example.chapterchallenge7.gameplay.data.GameplayData
 import com.example.chapterchallenge7.mainmenu.MainMenuActivity
 import com.example.chapterchallenge7.playermode.PlayerModeActivity
-import kotlin.math.log
-import kotlin.random.Random
+
 
 class GameplayVsPlayerActivity : AppCompatActivity(),
     GameResultDialogFragment.ResultDialogListener {
@@ -108,7 +107,6 @@ class GameplayVsPlayerActivity : AppCompatActivity(),
             } else {
                 view.isSelected = true
                 setChosenItemTo(playerTwo)
-                calculateResult()
                 showGameResult()
                 view.isSelected = false
                 allPlayersItemsIsEnabled(false)
